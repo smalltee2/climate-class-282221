@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ห้องเรียน Climate Change 282221</title>
+<meta name="description" content="ห้องเรียนรายวิชา 282221 สัปดาห์ที่ 7 การเปลี่ยนแปลงสภาพภูมิอากาศ: จัดกลุ่ม สไลด์ งานกลุ่ม นำเสนอ บัตรออก และส่งการบ้าน">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: a classroom console. Warming-stripes strip under the header, six step cards on home,
+   each step opens a full-width stage sized for a projector; teacher controls unlock with a passcode. */
+:root{
+  --bg:#F5F7F9; --surface:#FFFFFF; --sunk:#EEF2F5; --ink:#14202B; --muted:#56626E; --line:#D9E0E6;
+  --heat:#C23F17; --heat-soft:#FBE9E2; --cool:#245F8F; --cool-soft:#E3EEF7;
+  --ok:#1C7A4B; --ok-soft:#E1F3E9; --warn:#9A6410; --warn-soft:#FBF0DC; --bad:#B42318; --bad-soft:#FBE4E1;
+  --display:"Bai Jamjuree","IBM Plex Sans Thai",system-ui,sans-serif;
+  --body:"IBM Plex Sans Thai",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --r:12px; color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#0E141A; --surface:#16202A; --sunk:#1C2833; --ink:#E7EDF2; --muted:#9BA8B5; --line:#2B3946;
+  --heat:#F0815C; --heat-soft:#3A2119; --cool:#79AEDC; --cool-soft:#182C3D;
+  --ok:#58C793; --ok-soft:#14301F; --warn:#E4B04F; --warn-soft:#33270F; --bad:#F0786A; --bad-soft:#3A1C19; color-scheme:dark}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+img{max-width:100%}
+[hidden]{display:none!important}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+h1,h2,h3{font-family:var(--display);line-height:1.2;text-wrap:balance;margin:0}
+h1{font-size:clamp(24px,3.2vw,34px);font-weight:700}
+h2{font-size:clamp(20px,2.4vw,26px);font-weight:700}
+h3{font-size:18px;font-weight:600}
+p{margin:0}
+a{color:var(--cool)}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--cool);outline-offset:2px}
+.muted{color:var(--muted)} .small{font-size:14px}
+.eyebrow{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.top{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-end;justify-content:space-between}
+.top .meta{display:flex;flex-direction:column;gap:4px;min-width:0}
+.who{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.stripes{display:flex;height:18px;border-radius:4px;overflow:hidden;margin-top:16px}
+.stripes i{flex:1;display:block}
+.stripecap{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted);margin-top:4px;font-variant-numeric:tabular-nums}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:13px;font-weight:500;background:var(--sunk);color:var(--muted);white-space:nowrap;text-decoration:none}
+.chip.ok{background:var(--ok-soft);color:var(--ok)} .chip.warn{background:var(--warn-soft);color:var(--warn)}
+.chip.bad{background:var(--bad-soft);color:var(--bad)} .chip.heat{background:var(--heat-soft);color:var(--heat)} .chip.cool{background:var(--cool-soft);color:var(--cool)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 16px;font-weight:600;min-height:42px;text-decoration:none;color:var(--ink)}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn.heat{background:var(--heat);border-color:var(--heat);color:#fff}
+.btn.cool{background:var(--cool);border-color:var(--cool);color:#fff}
+.btn.ghost{background:transparent}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.lg{font-size:18px;padding:12px 22px;min-height:52px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.spacer{flex:1}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:28px}
+@media (max-width:900px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.steps{grid-template-columns:1fr}}
+.step{display:flex;flex-direction:column;gap:10px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;min-height:180px;transition:border-color .15s,transform .15s;color:var(--ink)}
+.step:hover{border-color:var(--ink);transform:translateY(-2px)}
+.step .num{font-family:var(--mono);font-size:14px;color:var(--heat);font-weight:600}
+.step h3{font-size:21px}
+.step p{color:var(--muted);font-size:15px}
+.step .chip{align-self:flex-start;margin-top:auto}
+.stagehead{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:24px;margin-bottom:18px}
+.back{border:none;background:none;color:var(--muted);font-weight:600;padding:6px 0}
+.stepnav{display:flex;gap:6px;flex-wrap:wrap}
+.stepnav a{font-family:var(--mono);font-size:13px;text-decoration:none;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:4px 10px;background:var(--surface)}
+.stepnav a[aria-current="page"]{color:var(--bg);background:var(--ink);border-color:var(--ink)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;min-width:0}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:860px){.grid2,.grid3{grid-template-columns:1fr}}
+.notice{border-radius:10px;padding:12px 14px;font-size:15px;background:var(--cool-soft);color:var(--ink)}
+.notice.bad{background:var(--bad-soft)} .notice.warn{background:var(--warn-soft)} .notice.ok{background:var(--ok-soft)}
+.stack{display:flex;flex-direction:column;gap:14px;min-width:0}
+.gcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.gcard header{display:flex;gap:10px;align-items:baseline;justify-content:space-between}
+.gnum{font-family:var(--display);font-weight:700;font-size:22px}
+.scen{font-size:14px;color:var(--heat);font-weight:600}
+.members{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:3px;font-size:15px}
+.members li{display:flex;justify-content:space-between;gap:8px}
+.members .sid{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.shuffling .members li{animation:flick .18s steps(2) infinite}
+@keyframes flick{50%{opacity:.35}}
+.slidebox{position:relative;aspect-ratio:16/9;max-width:100%;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.slidebox iframe{border:0;width:100%;height:100%}
+.slidebox img{max-width:100%;max-height:100%;display:block;object-fit:contain}
+.mock{width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;padding:6% 8%;gap:2%}
+.mock .sec{font-family:var(--mono);color:var(--heat);font-size:clamp(11px,1.4vw,16px)}
+.mock .t{font-family:var(--display);font-weight:700;font-size:clamp(20px,3.6vw,44px);line-height:1.15}
+.mock .tag{position:absolute;top:12px;right:12px}
+.mock .pg{position:absolute;bottom:12px;right:16px;font-family:var(--mono);color:var(--muted);font-size:13px}
+.thumbs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}
+.thumbs button{flex:0 0 auto;width:120px;aspect-ratio:16/9;border:1px solid var(--line);border-radius:6px;background:var(--surface);font-size:11px;text-align:left;padding:6px;overflow:hidden;line-height:1.3;color:var(--muted)}
+.thumbs button[aria-current="true"]{border:2px solid var(--heat);color:var(--ink)}
+.fsable:fullscreen{background:var(--bg);padding:24px;overflow:auto;display:flex;flex-direction:column;justify-content:center}
+.fsable:fullscreen .slidebox{border:none;border-radius:0;max-height:calc(100vh - 48px)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.tile{display:flex;flex-direction:column;gap:6px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;min-height:120px;color:var(--ink)}
+.tile[aria-pressed="true"]{border:2px solid var(--ink)}
+.tile .thumb{aspect-ratio:16/9;background:var(--sunk);border-radius:6px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--muted)}
+.tile .thumb img{width:100%;height:100%;object-fit:cover}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:14px;font-weight:600;color:var(--muted)}
+input[type=text],input[type=number],input[type=password],textarea,select{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%;color:var(--ink);font-weight:400;min-height:42px}
+textarea{resize:vertical;min-height:64px}
+.chain{display:flex;flex-direction:column;gap:6px}
+.chain .s{display:flex;gap:8px;align-items:center}
+.chain .s b{font-family:var(--mono);width:28px;flex:0 0 28px;color:var(--heat)}
+.preview img{width:100%;border-radius:8px;border:1px solid var(--line)}
+.filebtn{position:relative;overflow:hidden}
+.filebtn input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.present{display:grid;grid-template-columns:220px minmax(0,1fr);gap:16px}
+@media (max-width:860px){.present{grid-template-columns:1fr}}
+.glist{display:flex;flex-direction:column;gap:6px}
+@media (max-width:860px){.glist{flex-direction:row;overflow-x:auto}}
+.glist button{display:flex;justify-content:space-between;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:8px 12px;font-weight:600;text-align:left;flex:0 0 auto;color:var(--ink)}
+.glist button[aria-current="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.clock{font-family:var(--mono);font-weight:600;font-size:clamp(56px,9vw,112px);line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.clock.low{color:var(--heat)} .clock.over{color:var(--bad)}
+.phase{font-family:var(--display);font-weight:600;font-size:18px}
+.bar{height:8px;background:var(--sunk);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--cool);transition:width .25s linear}
+.bar.q i{background:var(--heat)}
+.picked{font-family:var(--display);font-weight:700;font-size:clamp(22px,3vw,32px)}
+.picked.spin{color:var(--muted)}
+.qtpl{background:var(--sunk);border-radius:10px;padding:14px 16px;font-size:17px}
+.qtpl .blank{display:inline-block;min-width:80px;border-bottom:2px dotted var(--muted)}
+.qcard{border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:10px;background:var(--surface)}
+.qcard.done{border-color:var(--ok)}
+.qn{font-family:var(--mono);color:var(--heat);font-weight:600}
+.rate{display:flex;gap:8px;flex-wrap:wrap}
+.rate button{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:7px 12px;font-weight:600;color:var(--ink)}
+.rate button[aria-pressed="true"].ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.rate button[aria-pressed="true"].warn{background:var(--warn);border-color:var(--warn);color:#fff}
+.rate button[aria-pressed="true"].bad{background:var(--bad);border-color:var(--bad);color:#fff}
+.leave{display:flex;align-items:center;gap:14px;padding:18px;border-radius:var(--r);background:var(--ok-soft);color:var(--ok);font-family:var(--display);font-weight:700;font-size:24px}
+details summary{cursor:pointer;color:var(--muted);font-size:14px;font-weight:600}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:13px;color:var(--muted);font-weight:600}
+td.mono{font-family:var(--mono);font-size:13px}
+.tablewrap{overflow-x:auto}
+.pages{display:flex;gap:10px;flex-wrap:wrap}
+.pages img{width:110px;height:146px;object-fit:cover;border-radius:6px;border:1px solid var(--line)}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:10px;font-weight:600;z-index:20;max-width:calc(100% - 32px)}
+.modal{position:fixed;inset:0;background:rgba(10,16,22,.45);display:flex;align-items:center;justify-content:center;padding:16px;z-index:30}
+.modal .panel{width:min(420px,100%)}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="top">
+      <div class="meta">
+        <span class="eyebrow">282221 · สัปดาห์ที่ 7 · นิสิต 53 คน · 9 กลุ่ม</span>
+        <h1>ห้องเรียน การเปลี่ยนแปลงสภาพภูมิอากาศ</h1>
+      </div>
+      <div class="who" id="who"></div>
+    </div>
+    <div class="stripes" id="stripes" role="img" aria-label="แถบสีแสดงผลต่างอุณหภูมิเฉลี่ยผิวโลก ปี 1880 ถึง 2025 จาก NASA GISTEMP สีน้ำเงินคือเย็นกว่าค่าเฉลี่ย สีแดงคือร้อนกว่า"></div>
+    <div class="stripecap"><span>1880</span><span>ผลต่างอุณหภูมิโลกเทียบค่าเฉลี่ย 1951–1980 (NASA GISTEMP)</span><span>2025</span></div>
+  </header>
+  <main id="view"></main>
+</div>
+<div class="toast" id="toast" hidden></div>
+<div class="modal" id="login" hidden>
+  <form class="panel stack" id="loginform">
+    <h3>เข้าสู่โหมดอาจารย์</h3>
+    <label class="f">รหัสอาจารย์<input type="password" id="tkey" autocomplete="current-password" required></label>
+    <div class="row"><span class="spacer"></span><button type="button" class="btn ghost" id="logincancel">ยกเลิก</button><button class="btn primary" type="submit">เข้าสู่ระบบ</button></div>
+  </form>
+</div>
+<script src="config.js"></script>
+<script>
+(() => {
+"use strict";
+/* ---------------- constants ---------------- */
+const STRIPES=[-0.17,-0.09,-0.11,-0.18,-0.28,-0.33,-0.31,-0.36,-0.18,-0.11,-0.35,-0.22,-0.27,-0.31,-0.3,-0.23,-0.11,-0.11,-0.28,-0.18,-0.08,-0.15,-0.28,-0.37,-0.47,-0.26,-0.22,-0.38,-0.42,-0.48,-0.43,-0.44,-0.37,-0.34,-0.15,-0.14,-0.36,-0.46,-0.3,-0.27,-0.27,-0.18,-0.28,-0.26,-0.27,-0.22,-0.1,-0.21,-0.2,-0.36,-0.15,-0.09,-0.16,-0.28,-0.13,-0.2,-0.15,-0.03,-0.0,-0.02,0.12,0.18,0.06,0.09,0.2,0.09,-0.07,-0.03,-0.11,-0.11,-0.17,-0.07,0.01,0.08,-0.13,-0.14,-0.19,0.05,0.06,0.03,-0.03,0.06,0.03,0.05,-0.2,-0.11,-0.06,-0.02,-0.08,0.05,0.03,-0.08,0.01,0.16,-0.07,-0.01,-0.1,0.18,0.07,0.16,0.26,0.32,0.14,0.32,0.15,0.12,0.18,0.32,0.39,0.27,0.45,0.41,0.22,0.23,0.31,0.45,0.33,0.47,0.61,0.38,0.39,0.53,0.63,0.62,0.53,0.68,0.64,0.67,0.54,0.66,0.72,0.61,0.65,0.67,0.75,0.9,1.01,0.91,0.85,0.98,1.0,0.85,0.89,1.17,1.28,1.19];
+const DRIVE_ROOT="1JJi0tDkGwst2jOdMjmqt3BgA6yJ88hQF";
+const SHEET_URL="https://docs.google.com/spreadsheets/d/1Zxv9mbEBykVpRS_tKhlHL3BfilXoW4qLCxq-lwXR2sI/edit";
+const SCEN=[
+ {t:"เปิดเครื่องปรับอากาศในหอพักช่วงเมษายน", ef:"ไฟฟ้า", efv:0.4750, unit:"kWh"},
+ {t:"ไฟฟ้าในอาคารเรียนและห้องแล็บของคณะ", ef:"ไฟฟ้า", efv:0.4750, unit:"kWh"},
+ {t:"ชาร์จและเปิดอุปกรณ์ไฟฟ้าทิ้งไว้ในหอพัก", ef:"ไฟฟ้า", efv:0.4750, unit:"kWh"},
+ {t:"เศษอาหารจากโรงอาหารส่งฝังกลบ", ef:"ขยะส่งฝังกลบ", efv:2.3200, unit:"kg"},
+ {t:"ขยะในหอพักที่ไม่แยกประเภท", ef:"ขยะส่งฝังกลบ", efv:2.3200, unit:"kg"},
+ {t:"ร้านอาหารรอบมหาวิทยาลัยใช้ก๊าซหุงต้ม", ef:"LPG", efv:3.1134, unit:"kg"},
+ {t:"พิมพ์รายงานและเอกสารลงกระดาษ", ef:"กระดาษ", efv:2.1020, unit:"kg"},
+ {t:"เครื่องสูบน้ำดีเซลช่วงภัยแล้ง", ef:"ดีเซล", efv:2.7078, unit:"ลิตร"},
+ {t:"เผาตอซังข้าวโพดก่อนฤดูปลูก", ef:null, efv:null, unit:""}
+];
+const PATTERN={A:{name:"กลไก",tpl:"จากขั้น ____ ไปสู่ขั้น ____ ในห่วงโซ่ เกิดขึ้นได้อย่างไร"},
+               B:{name:"ข้อมูล",tpl:"ข้อมูล ____ ที่กลุ่มยกมา มาจากแหล่งใด และเกี่ยวกับสถานการณ์ของกลุ่มอย่างไร"},
+               C:{name:"การคำนวณ",tpl:"ค่า ____ kgCO₂e ที่ลดได้ มาจากปริมาณ ____ คูณค่า EF ____ และปริมาณนี้ได้มาจากอะไร"}};
+const patternOf=g=>["A","B","C"][(g-1)%3];
+const askerOf=g=>g%9+1;
+const EXITQ=[
+ {q:"อธิบายปรากฏการณ์เรือนกระจก และยกก๊าซเรือนกระจกหลัก 2 ชนิด พร้อมแหล่งที่มาของแต่ละชนิด", clo:"CLO2",
+  key:"แสงอาทิตย์ทำให้ผิวโลกอุ่น ผิวโลกแผ่รังสีอินฟราเรดกลับ ก๊าซเรือนกระจกดูดกลืนแล้วแผ่บางส่วนกลับลงมา · CO₂ จากเชื้อเพลิงฟอสซิล/เผาชีวมวล · CH₄ จากนาข้าว ปศุสัตว์ ขยะอินทรีย์ · N₂O จากปุ๋ยไนโตรเจน · ต้องไม่สับสนกับรูโหว่โอโซน"},
+ {q:"ภาคใดปล่อยก๊าซเรือนกระจกมากที่สุดของไทย ราวร้อยละเท่าไร และสถานการณ์ของกลุ่มนับอยู่ในภาคใด", clo:"CLO2",
+  key:"ภาคพลังงาน 65.89% (BTR1 ปีบัญชี 2022) ราวสองในสาม · ไฟฟ้า LPG ดีเซล อยู่ภาคพลังงาน · เศษอาหาร/ขยะอยู่ภาคของเสีย · เผาในไร่อยู่ภาคเกษตรกรรม"},
+ {q:"มาตรการที่กลุ่มเสนอเป็น Mitigation หรือ Adaptation เพราะเหตุใด และนิสิตจะทำได้จริงอย่างไร", clo:"CLO4",
+  key:"Mitigation = ลดการปล่อยหรือเพิ่มการดูดกลับ · Adaptation = รับมือผลกระทบ · มาตรการต้องเจาะจง ทำได้จริง เช่น ตั้งแอร์ 26 °C ปิดเมื่อออกจากห้อง"}
+];
+const MOCK=[["เปิดบท","การเปลี่ยนแปลงสภาพภูมิอากาศ ภาวะโลกร้อน ก๊าซเรือนกระจก และคาร์บอนฟุตพริ้นท์"],["เนื้อหาวันนี้","8 หัวข้อของคาบ"],["01 · Weather vs Climate","Weather คือวันนี้ Climate คือภาพระยะยาว"],["01 · ความเข้าใจผิด","สามความเชื่อที่ต้องแก้ให้ถูก"],["02 · ปรากฏการณ์เรือนกระจก","ผ้าห่มบาง ๆ ที่ทำให้โลกอยู่อาศัยได้"],["02 · ส่วนที่มนุษย์เพิ่ม","มนุษย์ทำให้ “ผ้าห่ม” หนาขึ้น"],["03 · ก๊าซเรือนกระจกหลัก","สามก๊าซหลัก ความแรงต่างกันมาก"],["03 · แหล่งที่มา","ก๊าซแต่ละชนิดมาจากไหน"],["04 · NOAA Mauna Loa","CO₂ ในบรรยากาศยังเพิ่มขึ้นทุกปี"],["04 · NASA GISTEMP","อุณหภูมิผิวโลกสูงเป็นประวัติการณ์"],["04 · BTR1 ของไทย","ภาคพลังงานปล่อยราวสองในสามของประเทศ"],["05 · ผลกระทบ","ผลกระทบที่เกิดขึ้นแล้ว ไม่ใช่อนาคต"],["06 · แนวทางรับมือ","สองแนวทางที่ต้องทำควบคู่กัน"],["06 · ตัวอย่าง","ทำอะไรได้บ้างตั้งแต่วันนี้"],["07 · CO₂e","แปลงทุกก๊าซให้เป็น “สกุลเงินเดียวกัน”"],["07 · Emission Factor","การปล่อย = ข้อมูลกิจกรรม × EF"],["07 · ตัวอย่างการคำนวณ","บ้านหนึ่งหลังปล่อยเท่าไรใน 1 เดือน"],["08 · นิยาม","สองคำที่ฟังคล้ายกัน แต่ขอบเขตต่างกัน"],["08 · เป้าหมายประเทศ","ไทยเลื่อนเป้า Net Zero เร็วขึ้นเป็นปี 2050"],["08 · บุคคลกับประเทศ","ตัวเลขประเทศ คือผลรวมของการตัดสินใจรายวัน"],["สรุปบทเรียน","ห้าประเด็นที่ควรจำ"],["แหล่งข้อมูล","เอกสารอ้างอิง"]];
+const ROUTES=["home","groups","slides","work","present","exit","homework"];
+const STEPS=[
+ {r:"groups",n:"01",t:"สุ่มจัดกลุ่ม",d:"สุ่มนิสิต 53 คนเป็น 9 กลุ่ม คละหลักสูตรและเพศ พร้อมสถานการณ์ประจำกลุ่ม"},
+ {r:"slides",n:"02",t:"สไลด์บรรยาย",d:"สไลด์ตัวอย่าง 22 หน้า อาจารย์อัปโหลดไฟล์จริงทับได้ทุกเมื่อ"},
+ {r:"work",n:"03",t:"อภิปรายกลุ่ม",d:"ถ่ายรูปแผ่นงาน A4 แล้วส่งภาพนำเสนอ ทำจาก AI ของกลุ่มหรือพิมพ์ให้ระบบสร้าง"},
+ {r:"present",n:"04",t:"นำเสนอและซักถามสด",d:"สุ่มผู้นำเสนอและผู้ถาม นาฬิกาจับเวลา แบบคำถาม A B C"},
+ {r:"exit",n:"05",t:"บัตรออกรายกลุ่ม",d:"สุ่มผู้ตอบ 3 คำถาม ตอบครบแล้วกลุ่มออกจากห้องได้"},
+ {r:"homework",n:"06",t:"ส่งการบ้าน",d:"ทำในกระดาษ A4 ถ่ายรูปแล้วอัปโหลดด้วยรหัสนิสิต"}
+];
+
+/* ---------------- state ---------------- */
+const API=new URLSearchParams(location.search).get("api")||(window.APP_CONFIG&&window.APP_CONFIG.apiUrl)||"";
+const S={st:null,teacher:false,key:"",loading:true,err:null,
+  sel:{work:1,present:1,exit:1,slide:0},edit:null,draft:null,busy:false,confirmUnlock:false,
+  timer:{phase:"idle",total:0,endAt:0,left:0,running:false},dur:{p:120,q:60},
+  hwCheck:null,hwId:""};
+try{S.key=localStorage.getItem("cc-tk")||"";S.hwId=localStorage.getItem("cc-sid")||""}catch(e){}
+
+/* ---------------- utils ---------------- */
+const $=s=>document.querySelector(s);
+const h=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const reduced=()=>matchMedia("(prefers-reduced-motion: reduce)").matches;
+const img=(id,w=1600)=>`https://drive.google.com/thumbnail?id=${encodeURIComponent(id)}&sz=w${w}`;
+const fileUrl=id=>`https://drive.google.com/file/d/${encodeURIComponent(id)}/view`;
+const fmtTime=ts=>ts?new Date(ts).toLocaleString("th-TH",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}):"";
+function toast(msg,ms=3200){const t=$("#toast");t.textContent=msg;t.hidden=false;clearTimeout(toast._t);toast._t=setTimeout(()=>t.hidden=true,ms)}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+const roster=()=>S.st?.roster||[];
+const fullName=id=>roster().find(r=>r.id===id)?.name||id||"";
+const pname=p=>p?.name||"—";
+const idsOf=g=>(S.st?.groupIds?.[g-1])||[];
+function stripeColor(v){
+  const lerp=(a,b,t)=>a.map((x,i)=>Math.round(x+(b[i]-x)*t));let c;
+  if(v<0){const t=Math.min(1,-v/0.5);c=t<.5?lerp([247,251,255],[107,174,214],t*2):lerp([107,174,214],[8,69,148],(t-.5)*2)}
+  else{const t=Math.min(1,v/1.25);c=t<.5?lerp([255,245,240],[251,106,74],t*2):lerp([251,106,74],[103,0,13],(t-.5)*2)}
+  return `rgb(${c[0]},${c[1]},${c[2]})`;
+}
+async function compress(file,max=1800,q=.85){
+  let bmp;
+  try{bmp=await createImageBitmap(file)}catch(e){throw new Error("เปิดไฟล์รูปนี้ไม่ได้ ลองถ่ายใหม่หรือเลือกไฟล์ JPG/PNG")}
+  const s=Math.min(1,max/Math.max(bmp.width,bmp.height));
+  const c=document.createElement("canvas");c.width=Math.round(bmp.width*s);c.height=Math.round(bmp.height*s);
+  c.getContext("2d").drawImage(bmp,0,0,c.width,c.height);
+  return await new Promise(r=>c.toBlob(r,"image/jpeg",q));
+}
+const b64=blob=>new Promise((res,rej)=>{const fr=new FileReader();fr.onload=()=>res(String(fr.result).split(",")[1]);fr.onerror=rej;fr.readAsDataURL(blob)});
+function beep(freq=880,ms=350){try{const A=beep.ctx||(beep.ctx=new (window.AudioContext||window.webkitAudioContext)());const o=A.createOscillator(),g=A.createGain();o.frequency.value=freq;o.connect(g);g.connect(A.destination);g.gain.setValueAtTime(.2,A.currentTime);g.gain.exponentialRampToValueAtTime(.001,A.currentTime+ms/1000);o.start();o.stop(A.currentTime+ms/1000)}catch(e){}}
+async function wake(){try{S.wl=await navigator.wakeLock?.request("screen")}catch(e){}}
+function fs(el){if(!el) return;try{if(document.fullscreenElement) document.exitFullscreen();else el.requestFullscreen?.().catch(()=>toast("เบราว์เซอร์นี้เปิดเต็มจอไม่ได้"))}catch(e){toast("เบราว์เซอร์นี้เปิดเต็มจอไม่ได้")}}
+
+/* ---------------- API ---------------- */
+async function call(action,data={}){
+  if(!API) throw new Error("ยังไม่ได้ตั้งค่า URL ของ Apps Script ใน config.js");
+  let r;
+  try{r=await fetch(API,{method:"POST",body:JSON.stringify(Object.assign({action,key:S.key},data))})}
+  catch(e){throw new Error("ติดต่อเซิร์ฟเวอร์ไม่ได้ ตรวจอินเทอร์เน็ตแล้วลองอีกครั้ง")}
+  let j;try{j=await r.json()}catch(e){throw new Error("เซิร์ฟเวอร์ตอบกลับไม่ถูกต้อง")}
+  if(!j.ok) throw new Error(j.error||"ทำรายการไม่สำเร็จ");
+  return j;
+}
+async function load(quiet){
+  try{const j=await call("state");S.st=j.state;S.teacher=!!j.teacher;S.err=null;
+    if(!S.teacher&&S.key){S.key="";try{localStorage.removeItem("cc-tk")}catch(e){}}}
+  catch(e){S.err=e.message}
+  S.loading=false;render(quiet);
+}
+setInterval(()=>{if(document.hidden||S.busy||!API) return;const r=route();
+  if(S.teacher&&["groups","work","present","exit","homework"].includes(r)) load(true);
+  else if(r==="work") load(true)},S.teacher?6000:15000);
+
+/* ---------------- shell ---------------- */
+function renderStripes(){$("#stripes").innerHTML=STRIPES.map(v=>`<i style="background:${stripeColor(v)}"></i>`).join("")}
+function renderWho(){
+  const c=[];
+  if(S.teacher){c.push(`<span class="chip heat">โหมดอาจารย์</span>`,`<a class="chip ok" href="https://drive.google.com/drive/folders/${DRIVE_ROOT}" target="_blank" rel="noopener">Google Drive</a>`,`<a class="chip ok" href="${SHEET_URL}" target="_blank" rel="noopener">ตารางบันทึก</a>`,`<button class="btn ghost" data-act="logout">ออกจากโหมดอาจารย์</button>`)}
+  else c.push(`<button class="btn ghost" data-act="login">โหมดอาจารย์</button>`);
+  $("#who").innerHTML=c.join("");
+}
+function route(){const r=(location.hash||"").slice(1);return ROUTES.includes(r)?r:"home"}
+function stageHead(r,title,extra=""){
+  return `<div class="stagehead"><button class="back" data-go="home">← ทุกขั้นตอน</button><span class="spacer"></span>
+  <nav class="stepnav" aria-label="ขั้นตอน">${STEPS.map(s=>`<a href="#${s.r}" ${s.r===r?'aria-current="page"':""}>${s.n} ${h(s.t)}</a>`).join("")}</nav></div>
+  <div class="row" style="margin-bottom:18px"><h2>${h(title)}</h2><span class="spacer"></span>${extra}</div>`;
+}
+let lastRoute=null;
+function render(quiet){
+  const r=route();
+  if(quiet&&S.busy) return;
+  if(quiet&&r===lastRoute&&(r==="work"&&S.edit||r==="homework"&&!S.teacher)){if(r==="work") renderWorkTiles();return}
+  lastRoute=r;renderWho();
+  const v=$("#view");
+  if(!API){v.innerHTML=`<div class="notice warn" style="margin-top:24px">ยังไม่ได้ตั้งค่า URL ของ Google Apps Script ใส่ค่า apiUrl ในไฟล์ config.js ตามขั้นตอนใน README</div>`;return}
+  if(S.loading&&!S.st){v.innerHTML=`<p class="muted" style="margin-top:24px">กำลังโหลดข้อมูลห้องเรียน…</p>`;return}
+  ({home:vHome,groups:vGroups,slides:vSlides,work:vWork,present:vPresent,exit:vExit,homework:vHomework})[r](v);
+}
+function statusOf(r){
+  const st=S.st||{};
+  switch(r){
+    case "groups":return st.groups&&st.lockedAt?["ok",`จัดแล้ว ${st.groups.length} กลุ่ม`]:["","ยังไม่จัดกลุ่ม"];
+    case "slides":return st.slides?.fileId?["ok","มีสไลด์แล้ว"]:["warn","ใช้สไลด์ตัวอย่าง"];
+    case "work":{const n=Object.values(st.work||{}).filter(w=>w.slide||w.photo).length;return [n===9?"ok":n?"warn":"",`ส่งแล้ว ${n}/9 กลุ่ม`]}
+    case "present":{const n=Object.values(st.present||{}).filter(p=>p.done).length;return [n===9?"ok":n?"warn":"",`นำเสนอแล้ว ${n}/9`]}
+    case "exit":{const n=Object.values(st.exit||{}).filter(e=>e.done).length;return [n===9?"ok":n?"warn":"",`ออกจากห้องแล้ว ${n}/9`]}
+    case "homework":{if(!S.teacher) return ["","ส่งด้วยรหัสนิสิต"];const n=Object.keys(st.homework||{}).length;return [n===53?"ok":n?"warn":"",`ส่งแล้ว ${n}/53 คน`]}
+  }
+}
+function vHome(v){
+  v.innerHTML=`<p class="muted" style="margin-top:24px;max-width:70ch">ขั้นตอนเรียงตามลำดับในคาบ กดการ์ดเพื่อเปิดแต่ละขั้น ไฟล์ทุกชิ้นเก็บใน Google Drive ของอาจารย์โดยอัตโนมัติ</p>
+  ${S.err?`<div class="notice bad" style="margin-top:16px">${h(S.err)} <button class="btn" data-act="reload">ลองใหม่</button></div>`:""}
+  <div class="steps">${STEPS.map(s=>{const [k,t]=statusOf(s.r);return `<button class="step" data-go="${s.r}"><span class="num">ขั้นที่ ${s.n}</span><h3>${h(s.t)}</h3><p>${h(s.d)}</p><span class="chip ${k}">${h(t)}</span></button>`}).join("")}</div>`;
+}
+
+/* ---------------- 1 groups ---------------- */
+function makeGroups(){
+  const key=r=>r.prog+"|"+(/^นาย(?!สาว)/.test(r.name)?"m":"f");
+  const strata={};roster().forEach(r=>(strata[key(r)]=strata[key(r)]||[]).push(r.id));
+  const order=Object.keys(strata).sort().flatMap(k=>shuffle(strata[k]));
+  const gs=Array.from({length:9},()=>[]);order.forEach((id,i)=>gs[i%9].push(id));
+  return shuffle(gs).sort((a,b)=>b.length-a.length);
+}
+function vGroups(v){
+  const st=S.st||{};const locked=!!st.lockedAt;
+  const show=S.draft?S.draft.map(m=>m.map(id=>({id,name:fullName(id)}))):st.groups;
+  const extra=S.teacher?(locked&&!S.draft?`<span class="chip ok">ล็อกเมื่อ ${h(fmtTime(st.lockedAt))}</span><button class="btn ghost" data-act="groups-unlock">ยกเลิกการล็อก</button>`
+     :`<button class="btn lg heat" data-act="groups-shuffle">${show?"สุ่มใหม่":"สุ่มกลุ่ม"}</button><button class="btn lg primary" data-act="groups-lock" ${S.draft?"":"disabled"}>ล็อกกลุ่มและบันทึก</button>`):"";
+  v.innerHTML=stageHead("groups","สุ่มจัดกลุ่ม",extra)+
+  (S.confirmUnlock?`<div class="notice warn row" style="margin-bottom:14px"><span>ยกเลิกการล็อกเพื่อสุ่มใหม่ งานที่ส่งแล้วยังผูกกับหมายเลขกลุ่มเดิม ยืนยันหรือไม่</span><span class="spacer"></span><button class="btn" data-act="groups-unlock-no">ไม่ยกเลิก</button><button class="btn heat" data-act="groups-unlock-yes">ยืนยัน</button></div>`:"")+
+  (!show?`<div class="panel stack"><p>สุ่มแบบคละหลักสูตร (ป.ตรี และ ป.ตรี-โท) และเพศ แจกเข้า 9 กลุ่ม ได้กลุ่มละ 6 คน 8 กลุ่ม และ 5 คน 1 กลุ่ม</p>${S.teacher?"":"<p class='muted'>อาจารย์ยังไม่ได้จัดกลุ่ม</p>"}</div>`:
+   `${S.draft?`<div class="notice warn" style="margin-bottom:14px">ผลสุ่มนี้ยังไม่บันทึก กด “ล็อกกลุ่มและบันทึก” เมื่อพอใจ</div>`:""}
+   <div class="grid3" id="glist">${show.map((m,i)=>`<article class="gcard"><header><span class="gnum">กลุ่ม ${i+1}</span><span class="chip">${m.length} คน</span></header>
+   <div class="scen">${h(SCEN[i].t)}</div><ul class="members">${m.map(p=>`<li><span>${h(p.name)}</span>${p.id?`<span class="sid">${h(p.id)}</span>`:""}</li>`).join("")}</ul></article>`).join("")}</div>`);
+}
+async function doShuffle(){
+  S.busy=true;
+  if(!reduced()){for(let k=0;k<6;k++){S.draft=makeGroups();render();$("#glist")?.classList.add("shuffling");await sleep(110)}}
+  S.draft=makeGroups();S.busy=false;render();
+}
+async function lockGroups(){
+  if(!S.draft) return;
+  try{toast("กำลังบันทึกกลุ่ม…",8000);await call("saveGroups",{groups:S.draft});S.draft=null;toast("ล็อกกลุ่มแล้ว");await load()}catch(e){toast(e.message,6000)}
+}
+
+/* ---------------- 2 slides ---------------- */
+function vSlides(v){
+  const sl=S.st?.slides;const i=Math.min(S.sel.slide,MOCK.length-1);
+  v.innerHTML=stageHead("slides","สไลด์บรรยาย",S.teacher?`<label class="btn filebtn">อัปโหลดสไลด์ (PDF/PPTX)<input type="file" id="slidefile" accept=".pdf,.pptx,application/pdf,application/vnd.openxmlformats-officedocument.presentationml.presentation"></label>${sl?`<button class="btn ghost" data-act="slides-mock">กลับไปใช้สไลด์ตัวอย่าง</button>`:""}`:"")+
+  `<div class="stack fsable" id="slidestage">
+   ${S.teacher?`<form class="row" id="linkform"><input type="text" id="slidelink" placeholder="หรือวางลิงก์ไฟล์สไลด์จาก Google Drive" style="flex:1;min-width:220px"><button class="btn" type="submit">ใช้ไฟล์นี้</button></form>`:""}
+   ${sl?`<div class="row small muted"><span>${h(sl.name||"สไลด์")}</span><a href="${fileUrl(sl.fileId)}" target="_blank" rel="noopener">เปิดใน Google Drive</a></div>
+      <div class="slidebox"><iframe src="https://drive.google.com/file/d/${encodeURIComponent(sl.fileId)}/preview" allow="fullscreen" allowfullscreen title="สไลด์บรรยาย"></iframe></div>
+      <div class="row"><span class="spacer"></span><button class="btn primary" data-act="slide-fs">เต็มจอ</button></div>`
+   :`<div class="notice warn">กำลังแสดงสไลด์ตัวอย่าง (mockup) ${MOCK.length} หน้าตามโครงของสไลด์จริง${S.teacher?" อัปโหลดไฟล์ PDF หรือ PPTX หรือวางลิงก์ Google Drive เพื่อแทนที่":""}</div>
+     <div class="slidebox"><div class="mock"><span class="chip warn tag">ตัวอย่าง</span><span class="sec">${h(MOCK[i][0])}</span><span class="t">${h(MOCK[i][1])}</span><span class="pg">${i+1} / ${MOCK.length}</span></div></div>
+     <div class="row"><button class="btn" data-act="slide-prev" ${i<=0?"disabled":""}>← ก่อนหน้า</button><span class="muted" style="font-family:var(--mono)">${i+1} / ${MOCK.length}</span><button class="btn" data-act="slide-next" ${i>=MOCK.length-1?"disabled":""}>ถัดไป →</button><span class="spacer"></span><button class="btn primary" data-act="slide-fs">เต็มจอ</button></div>
+     <div class="thumbs">${MOCK.map((m,k)=>`<button data-slide="${k}" aria-current="${k===i}"><b>${k+1}</b> ${h(m[1])}</button>`).join("")}</div>`}
+  </div>`;
+}
+async function uploadSlides(file){
+  const pdf=/\.pdf$/i.test(file.name),pptx=/\.pptx$/i.test(file.name);
+  if(!pdf&&!pptx) return toast("รองรับเฉพาะ PDF หรือ PPTX",5000);
+  if(file.size>35*1024*1024) return toast("ไฟล์ใหญ่เกิน 35 MB ให้อัปโหลดเข้าโฟลเดอร์ใน Drive เองแล้ววางลิงก์แทน",7000);
+  try{S.busy=true;toast("กำลังอัปโหลดสไลด์… ไฟล์ใหญ่อาจใช้เวลาเกินหนึ่งนาที",90000);
+    await call("uploadSlides",{name:file.name,mime:pdf?"application/pdf":"application/vnd.openxmlformats-officedocument.presentationml.presentation",data:await b64(file)});
+    toast("อัปโหลดสไลด์แล้ว");}catch(e){toast(e.message,7000)}finally{S.busy=false;load()}
+}
+
+/* ---------------- 3 group work ---------------- */
+const W=g=>S.st?.work?.[g]||{};
+function workStatus(w){if(w.slide) return ["ok","มีภาพนำเสนอแล้ว"];if(w.photo) return ["warn","มีรูปแผ่นงานแล้ว"];return ["","ยังไม่ส่ง"]}
+function renderWorkTiles(){
+  const el=$("#tiles");if(!el) return;
+  el.innerHTML=SCEN.map((s,i)=>{const g=i+1,w=W(g);const [k,t]=workStatus(w);const f=w.slide?.fileId||w.photo?.fileId;
+    return `<button class="tile" data-wg="${g}" aria-pressed="${S.sel.work===g}"><b>กลุ่ม ${g}</b>
+    <div class="thumb">${f?`<img src="${img(f,480)}" alt="งานกลุ่ม ${g}" loading="lazy">`:"ยังไม่มีรูป"}</div><span class="small muted">${h(s.t)}</span><span class="chip ${k}">${h(t)}</span></button>`}).join("");
+}
+function vWork(v){
+  const g=S.sel.work,w=W(g),s=SCEN[g-1];
+  v.innerHTML=stageHead("work","อภิปรายกลุ่ม")+
+  `<div class="stack">
+   <div class="notice"><b>โจทย์ของทุกกลุ่ม (เขียนลงกระดาษ A4):</b> 1) ห่วงโซ่อย่างน้อย 5 ขั้น ต้องมีขั้นกลไกเรือนกระจก 2) ข้อมูลจริง 1 ชิ้นจากสไลด์ 9–11 พร้อมแหล่งที่มา 3) มาตรการ Mitigation 1 ข้อ และ Adaptation 1 ข้อ 4) ปริมาณที่ลดได้เป็น kgCO₂e ตามค่า EF ในสไลด์ 16 (กลุ่ม 9 อธิบายผลต่อ PM2.5 และสุขภาพแทน)</div>
+   <div class="tiles" id="tiles"></div>
+   <div class="panel stack">
+     <div class="row"><h3>กลุ่ม ${g} · ${h(s.t)}</h3><span class="spacer"></span>${s.ef?`<span class="chip cool">EF ${h(s.ef)} ${s.efv.toFixed(4)} kgCO₂e/${h(s.unit)}</span>`:`<span class="chip">ไม่ต้องคำนวณ</span>`}</div>
+     ${S.st?.groups?.[g-1]?`<p class="small muted">สมาชิก: ${S.st.groups[g-1].map(p=>h(p.name)).join(" · ")}</p>`:""}
+     <div class="grid2">
+       <div class="stack">
+         <h3>1 · ส่งรูปแผ่นงาน A4</h3>
+         <p class="small muted">ถ่ายให้เห็นกระดาษทั้งแผ่น ในที่สว่าง ไม่เอียง รูปจะถูกเก็บใน Google Drive ของอาจารย์</p>
+         <div class="row"><label class="btn heat filebtn">ถ่าย/เลือกรูปแผ่นงาน<input type="file" id="photofile" accept="image/*" capture="environment"></label></div>
+         ${w.photo?`<figure class="preview" style="margin:0"><img src="${img(w.photo.fileId)}" alt="รูปแผ่นงานกลุ่ม ${g}"><figcaption class="small muted">ส่งเมื่อ ${h(fmtTime(w.photo.at))}</figcaption></figure>`:""}
+       </div>
+       <div class="stack">
+         <h3>2 · ส่งภาพนำเสนอ</h3>
+         <p class="small muted">ใช้ AI ของกลุ่ม (เช่น Claude, Gemini, ChatGPT) แปลงรูปแผ่นงานเป็นภาพนำเสนอแนวนอน แล้วอัปโหลด หรือกด “พิมพ์ข้อความให้ระบบสร้างภาพ”</p>
+         <div class="row"><label class="btn cool filebtn">อัปโหลดภาพนำเสนอ<input type="file" id="slideimg" accept="image/*"></label><button class="btn" data-act="work-edit">${S.edit?"ปิดฟอร์ม":"พิมพ์ข้อความให้ระบบสร้างภาพ"}</button></div>
+         ${w.slide?`<figure class="preview" style="margin:0"><img src="${img(w.slide.fileId)}" alt="ภาพนำเสนอกลุ่ม ${g}"><figcaption class="small muted">${w.slide.source==="form"?"สร้างจากฟอร์ม":"อัปโหลดเอง"} · ${h(fmtTime(w.slide.at))}</figcaption></figure>`:`<div class="slidebox muted small">ภาพนำเสนอจะแสดงที่นี่</div>`}
+       </div>
+     </div>
+     <div id="editor"></div>
+   </div></div>`;
+  renderWorkTiles();if(S.edit) renderEditor();
+}
+function blankEx(){return {chain:["","","","",""],data:{text:"",source:""},mitigation:"",adaptation:"",calc:{quantity:"",ef:"",result:""}}}
+function renderEditor(){
+  const el=$("#editor");if(!el) return;const e=S.edit,s=SCEN[S.sel.work-1];
+  const q=parseFloat(e.calc.quantity),f=parseFloat(e.calc.ef||s.efv),r=parseFloat(e.calc.result);
+  const comp=isFinite(q)&&isFinite(f)?q*f:null;const mm=comp!=null&&isFinite(r)&&Math.abs(comp-r)>Math.max(.01,Math.abs(comp)*.02);
+  el.innerHTML=`<div class="stack" style="border-top:1px solid var(--line);padding-top:14px">
+   <h3>พิมพ์ข้อความจากแผ่นงาน</h3>
+   <div class="chain">${e.chain.map((c,k)=>`<div class="s"><b>${k+1}</b><input type="text" id="ch${k}" value="${h(c)}" aria-label="ขั้นที่ ${k+1}" placeholder="ขั้นที่ ${k+1}"></div>`).join("")}
+   <div class="row"><button class="btn ghost" data-act="ch-add">+ เพิ่มขั้น</button>${e.chain.length>5?`<button class="btn ghost" data-act="ch-del">− ลบขั้นสุดท้าย</button>`:""}</div></div>
+   <div class="grid2"><label class="f">ข้อมูลจริง<input type="text" id="dtext" value="${h(e.data.text)}"></label><label class="f">แหล่งที่มา<input type="text" id="dsrc" value="${h(e.data.source)}" placeholder="เช่น NOAA, NASA GISTEMP, BTR1"></label></div>
+   <div class="grid2"><label class="f">Mitigation<textarea id="mit">${h(e.mitigation)}</textarea></label><label class="f">Adaptation<textarea id="ada">${h(e.adaptation)}</textarea></label></div>
+   ${s.ef?`<div class="grid3"><label class="f">ปริมาณที่ลดได้ (${h(s.unit)})<input type="text" inputmode="decimal" id="cq" value="${h(e.calc.quantity)}"></label><label class="f">EF<input type="text" inputmode="decimal" id="cef" value="${h(e.calc.ef||s.efv)}"></label><label class="f">กลุ่มคำนวณได้ (kgCO₂e)<input type="text" inputmode="decimal" id="cr" value="${h(e.calc.result)}"></label></div>
+   <p class="small" id="calcnote" style="color:${mm?"var(--warn)":"var(--muted)"}">${comp!=null?`ตรวจ: ${q} × ${f} = ${comp.toFixed(2)} kgCO₂e${mm?" ไม่ตรงกับที่กลุ่มคำนวณ ภาพจะแสดงทั้งสองค่า":""}`:"ใส่ปริมาณเป็นตัวเลขเพื่อให้ระบบตรวจผลคูณ"}</p>`
+   :`<label class="f">ผลต่อ PM2.5 และสุขภาพ<textarea id="cr">${h(e.calc.result)}</textarea></label>`}
+   <div class="row"><button class="btn lg heat" data-act="work-make">สร้างภาพนำเสนอและส่ง</button></div></div>`;
+}
+function readEditor(){
+  const e=S.edit;if(!e||!$("#editor")) return;
+  e.chain=e.chain.map((_,k)=>$("#ch"+k)?.value??"");
+  e.data={text:$("#dtext")?.value||"",source:$("#dsrc")?.value||""};
+  e.mitigation=$("#mit")?.value||"";e.adaptation=$("#ada")?.value||"";
+  e.calc={quantity:$("#cq")?.value||"",ef:$("#cef")?.value||"",result:$("#cr")?.value||""};
+}
+async function sendWork(kind,blob,mime,extra={}){
+  const g=S.sel.work;S.busy=true;
+  try{toast(kind==="photo"?"กำลังส่งรูปแผ่นงาน…":"กำลังส่งภาพนำเสนอ…",30000);
+    await call("uploadWork",Object.assign({group:g,kind,mime,data:await b64(blob)},extra));
+    toast(kind==="photo"?`ส่งรูปแผ่นงานกลุ่ม ${g} แล้ว`:`ส่งภาพนำเสนอกลุ่ม ${g} แล้ว`);return true}
+  catch(e){toast(e.message,7000);return false}finally{S.busy=false;load()}
+}
+/* canvas slide (from the typed form) */
+function wrapLines(g,text,maxW,maxLines){
+  const seg=window.Intl?.Segmenter?new Intl.Segmenter("th",{granularity:"word"}):null;
+  const parts=seg?[...seg.segment(text)].map(x=>x.segment):[...text];const lines=[];let cur="";
+  for(const p of parts){const t=cur+p;if(g.measureText(t).width>maxW&&cur){lines.push(cur.trim());cur=p.trimStart()}else cur=t}
+  if(cur.trim()) lines.push(cur.trim());
+  if(lines.length>maxLines){const l=lines.slice(0,maxLines);l[maxLines-1]=l[maxLines-1].replace(/.{0,2}$/,"…");return {lines:l,over:true}}
+  return {lines,over:false};
+}
+function fitText(g,text,x,y,maxW,maxH,size,weight,color,family='"IBM Plex Sans Thai"'){
+  let s=size,res;
+  for(;s>=18;s-=2){g.font=`${weight} ${s}px ${family}`;res=wrapLines(g,text,maxW,Math.max(1,Math.floor(maxH/(s*1.35))));if(!res.over) break}
+  g.fillStyle=color;g.textBaseline="top";res.lines.forEach((l,i)=>g.fillText(l,x,y+i*s*1.35));return res.lines.length*s*1.35;
+}
+function rr(g,x,y,w,hh,r){g.beginPath();if(g.roundRect) g.roundRect(x,y,w,hh,r);else{g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+hh,r);g.arcTo(x+w,y+hh,x,y+hh,r);g.arcTo(x,y+hh,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath()}}
+function mixHex(a,b,t){const p=s=>[1,3,5].map(i=>parseInt(s.slice(i,i+2),16));const A=p(a),B=p(b);return `rgb(${A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(",")})`}
+async function makeSlideImage(g,e){
+  try{await Promise.all(['700 56px "Bai Jamjuree"','600 28px "IBM Plex Sans Thai"','400 28px "IBM Plex Sans Thai"','500 28px "IBM Plex Sans Thai"'].map(f=>document.fonts.load(f)))}catch(x){}
+  const Wd=1920,H=1080,c=document.createElement("canvas");c.width=Wd;c.height=H;const x=c.getContext("2d");const s=SCEN[g-1];
+  const INK="#14202B",MUT="#56626E",HEAT="#C23F17",COOL="#245F8F",SUNK="#EEF2F5";
+  x.fillStyle="#FFFFFF";x.fillRect(0,0,Wd,H);
+  const sw=Wd/STRIPES.length;STRIPES.forEach((v,i)=>{x.fillStyle=stripeColor(v);x.fillRect(Math.floor(i*sw),0,Math.ceil(sw)+1,20)});
+  x.textBaseline="top";x.fillStyle=HEAT;x.font='600 30px "IBM Plex Sans Thai"';x.fillText(`กลุ่ม ${g}`,80,58);
+  fitText(x,s.t,80,100,Wd-160,80,56,700,INK,'"Bai Jamjuree"');
+  x.fillStyle=MUT;x.font='600 24px "IBM Plex Sans Thai"';x.fillText("ห่วงโซ่เหตุและผล",80,200);
+  const steps=e.chain.map(t=>t.trim()).filter(Boolean).slice(0,10);
+  const rows=steps.length<=5?1:2,per=Math.ceil(Math.max(1,steps.length)/rows),gap=56;
+  const bw=(Wd-160-(per-1)*gap)/per,bh=rows===1?250:160;
+  steps.forEach((t,i)=>{const r=Math.floor(i/per),cI=i%per,bx=80+cI*(bw+gap),by=240+r*(bh+34);
+    const col=mixHex("#245F8F","#C23F17",steps.length>1?i/(steps.length-1):0);
+    x.fillStyle=SUNK;rr(x,bx,by,bw,bh,18);x.fill();
+    x.fillStyle=col;x.beginPath();x.arc(bx+34,by+34,20,0,Math.PI*2);x.fill();
+    x.fillStyle="#fff";x.font='600 22px "IBM Plex Mono", monospace';x.textAlign="center";x.fillText(String(i+1),bx+34,by+22);x.textAlign="left";
+    fitText(x,t,bx+20,by+68,bw-40,bh-84,rows===1?30:26,500,INK);
+    if(cI<per-1&&i<steps.length-1){const ax=bx+bw+8,ay=by+bh/2;x.strokeStyle=MUT;x.lineWidth=4;x.beginPath();x.moveTo(ax,ay);x.lineTo(ax+gap-18,ay);x.stroke();x.fillStyle=MUT;x.beginPath();x.moveTo(ax+gap-16,ay);x.lineTo(ax+gap-30,ay-9);x.lineTo(ax+gap-30,ay+9);x.closePath();x.fill()}
+  });
+  const py=240+rows*(bh+34)+16,ph=H-py-80,pw=(Wd-160-2*40)/3;
+  [["ข้อมูลจริง",COOL],["มาตรการ",HEAT],[s.ef?"การลดก๊าซ":"ผลต่อ PM2.5 และสุขภาพ",COOL]].forEach((p,i)=>{const px=80+i*(pw+40);x.fillStyle=SUNK;rr(x,px,py,pw,ph,18);x.fill();
+    x.fillStyle=p[1];x.font='600 26px "IBM Plex Sans Thai"';x.fillText(p[0],px+28,py+24);
+    const ix=px+28,iy=py+70,iw=pw-56,ih=ph-96;
+    if(i===0){const used=fitText(x,e.data.text||"—",ix,iy,iw,ih-50,28,400,INK);if(e.data.source) fitText(x,"ที่มา: "+e.data.source,ix,iy+Math.min(used+12,ih-40),iw,40,22,500,MUT)}
+    if(i===1){x.fillStyle=HEAT;x.font='600 22px "IBM Plex Sans Thai"';x.fillText("Mitigation",ix,iy);const u=fitText(x,e.mitigation||"—",ix,iy+34,iw,(ih-80)/2,26,400,INK);
+      const y2=iy+34+Math.min(u,(ih-80)/2)+16;x.fillStyle=COOL;x.font='600 22px "IBM Plex Sans Thai"';x.fillText("Adaptation",ix,y2);fitText(x,e.adaptation||"—",ix,y2+34,iw,iy+ih-(y2+34),26,400,INK)}
+    if(i===2){
+      if(s.ef){const q=parseFloat(e.calc.quantity),f=parseFloat(e.calc.ef||s.efv),r=parseFloat(e.calc.result);const comp=isFinite(q)&&isFinite(f)?q*f:null;
+        x.fillStyle=MUT;x.font='500 24px "IBM Plex Sans Thai"';x.fillText(`${e.calc.quantity||"?"} ${s.unit} × ${e.calc.ef||s.efv} kgCO₂e/${s.unit}`,ix,iy);
+        x.fillStyle=INK;x.font='700 64px "Bai Jamjuree"';x.fillText(comp!=null?comp.toFixed(2):(e.calc.result||"—"),ix,iy+44);
+        x.fillStyle=MUT;x.font='500 24px "IBM Plex Sans Thai"';x.fillText("kgCO₂e ที่ลดได้",ix,iy+124);
+        if(comp!=null&&isFinite(r)&&Math.abs(comp-r)>Math.max(.01,Math.abs(comp)*.02)){x.fillStyle=HEAT;x.font='500 22px "IBM Plex Sans Thai"';x.fillText(`กลุ่มคำนวณได้ ${r} (ระบบตรวจผลคูณใหม่)`,ix,iy+166)}
+        fitText(x,`EF ${s.ef} จาก TGO ตามสไลด์ 16`,ix,iy+ih-34,iw,30,20,400,MUT);
+      }else fitText(x,e.calc.result||"—",ix,iy,iw,ih,28,400,INK);
+    }
+  });
+  x.fillStyle=MUT;x.font='400 20px "IBM Plex Sans Thai"';x.fillText("282221 · สัปดาห์ที่ 7 · ภาพนี้สร้างจากข้อความที่กลุ่มพิมพ์",80,H-50);
+  return await new Promise(r=>c.toBlob(r,"image/png"));
+}
+async function makeAndSend(){
+  readEditor();const g=S.sel.work,e=S.edit;
+  if(e.chain.filter(t=>t.trim()).length<5) return toast("ห่วงโซ่ต้องมีอย่างน้อย 5 ขั้น",5000);
+  const blob=await makeSlideImage(g,e);
+  if(await sendWork("slide",blob,"image/png",{source:"form",ex:e})) S.edit=null;
+}
+
+/* ---------------- 4 present ---------------- */
+function vPresent(v){
+  const g=S.sel.present,st=S.st||{},p=st.present?.[g]||{},w=W(g),ag=askerOf(g),pat=patternOf(ag);const f=w.slide?.fileId||w.photo?.fileId;const T=S.teacher;
+  v.innerHTML=stageHead("present","นำเสนอและซักถามสด",T?`<label class="f" style="flex-direction:row;align-items:center;gap:6px">นำเสนอ<input type="number" id="durp" min="30" step="30" value="${S.dur.p}" style="width:84px">วิ</label><label class="f" style="flex-direction:row;align-items:center;gap:6px">ซักถาม<input type="number" id="durq" min="30" step="30" value="${S.dur.q}" style="width:84px">วิ</label>`:"")+
+  `<div class="present"><div class="glist">${SCEN.map((_,i)=>`<button data-pg="${i+1}" aria-current="${g===i+1}"><span>กลุ่ม ${i+1}</span>${st.present?.[i+1]?.done?`<span class="chip ok">✓</span>`:""}</button>`).join("")}</div>
+   <div class="stack fsable" id="pstage">
+     <div class="grid2" style="align-items:start">
+       <div class="stack"><span class="eyebrow">กลุ่ม ${g} · ${h(SCEN[g-1].t)}</span>
+         ${T?`<div class="phase" id="phase"></div><div class="clock" id="clock">0:00</div><div class="bar" id="bar"><i style="width:0%"></i></div><div class="row" id="tbtns"></div>`:`<p class="muted">อาจารย์ควบคุมเวลาจากหน้าจอหลัก</p>`}</div>
+       <div class="stack">
+         <div class="panel stack"><span class="eyebrow">ผู้นำเสนอ (สุ่มจากกลุ่ม ${g})</span><div class="picked" id="pp">${h(pname(p.presenter))}</div>${T?`<button class="btn heat" data-act="spin-presenter" ${idsOf(g).length?"":"disabled"}>สุ่มผู้นำเสนอ</button>`:""}</div>
+         <div class="panel stack"><span class="eyebrow">ผู้ถาม (สุ่มจากกลุ่ม ${ag}) · แบบ ${pat} ${PATTERN[pat].name}</span><div class="picked" id="pa">${h(pname(p.asker))}</div>${T?`<button class="btn cool" data-act="spin-asker" ${idsOf(ag).length?"":"disabled"}>สุ่มผู้ถาม</button>`:""}</div>
+       </div></div>
+     <div class="qtpl"><b>ส่วนที่ 1 (ทุกกลุ่ม):</b> “มาตรการ <span class="blank"></span> ของกลุ่ม ${g} เป็น [Mitigation / Adaptation] เพราะ <span class="blank"></span>”<br><b>ส่วนที่ 2 · แบบ ${pat} ${PATTERN[pat].name}:</b> “${h(PATTERN[pat].tpl).replace(/____/g,'<span class="blank"></span>')}”</div>
+     <div class="slidebox">${f?`<img src="${img(f,1920)}" alt="ภาพนำเสนอกลุ่ม ${g}">`:`<span class="muted">กลุ่ม ${g} ยังไม่ได้ส่งภาพนำเสนอ</span>`}</div>
+     ${T?`<div class="row"><button class="btn" data-act="present-fs">เต็มจอ</button><span class="spacer"></span>${p.done?`<span class="chip ok">นำเสนอแล้ว</span><button class="btn ghost" data-act="present-undone">ยกเลิกเครื่องหมาย</button>`:`<button class="btn primary" data-act="present-done">จบกลุ่มนี้</button>`}${g<9?`<button class="btn" data-act="present-next">กลุ่มถัดไป →</button>`:""}</div>`:""}
+   </div></div>`;
+  paintTimer();
+}
+function paintTimer(){
+  const T=S.timer,c=$("#clock");if(!c) return;const left=T.running?Math.max(0,(T.endAt-Date.now())/1000):T.left;
+  const sec=Math.ceil(left);c.textContent=`${Math.floor(sec/60)}:${String(sec%60).padStart(2,"0")}`;
+  c.className="clock"+(T.phase!=="idle"&&left<=0?" over":left<=15&&T.phase!=="idle"?" low":"");
+  $("#phase").textContent={idle:"พร้อมเริ่ม",present:"กำลังนำเสนอ",qa:"กำลังซักถาม"}[T.phase]+(T.phase!=="idle"&&left<=0?" · หมดเวลา":T.running?"":T.phase!=="idle"?" · หยุดชั่วคราว":"");
+  const bar=$("#bar");bar.className="bar"+(T.phase==="qa"?" q":"");bar.firstElementChild.style.width=(T.total?100*(1-left/T.total):0)+"%";
+  const b=$("#tbtns");if(b&&b.dataset.k!==T.phase+T.running){b.dataset.k=T.phase+T.running;
+    b.innerHTML=`<button class="btn lg primary" data-act="t-present">เริ่มนำเสนอ</button><button class="btn lg heat" data-act="t-qa">เริ่มซักถาม</button>${T.phase!=="idle"?`<button class="btn" data-act="t-pause">${T.running?"หยุด":"ต่อ"}</button><button class="btn" data-act="t-add">+30 วิ</button><button class="btn ghost" data-act="t-reset">รีเซ็ต</button>`:""}`}
+}
+function tStart(phase){const sec=phase==="present"?S.dur.p:S.dur.q;S.timer={phase,total:sec,left:sec,endAt:Date.now()+sec*1000,running:true,beeped:false};wake();beep(660,120);paintTimer()}
+setInterval(()=>{const T=S.timer;if(!T.running) return;const left=(T.endAt-Date.now())/1000;
+  if(left<=0){T.running=false;T.left=0;if(!T.beeped){T.beeped=true;beep(880,400);setTimeout(()=>beep(660,500),450)}}
+  if(route()==="present") paintTimer()},250);
+async function spin(elId,ids){
+  const el=$("#"+elId);if(!el||!ids.length) return null;S.busy=true;
+  if(!reduced()){el.classList.add("spin");for(let k=0;k<16;k++){el.textContent=fullName(ids[Math.floor(Math.random()*ids.length)]);await sleep(60+k*8)}}
+  const pick=ids[Math.floor(Math.random()*ids.length)];el.classList.remove("spin");el.textContent=fullName(pick);S.busy=false;return pick;
+}
+async function savePresent(data){try{await call("setPresent",{group:S.sel.present,data});load(true)}catch(e){toast(e.message,6000)}}
+
+/* ---------------- 5 exit ---------------- */
+function exitDone(e){return !!e&&[0,1,2].every(i=>["pass","partial"].includes(e.q?.[i]?.rating))}
+function exitRaw(g){return structuredClone(S.st?.exitRaw?.[g]||{q:[{},{},{}]})}
+function vExit(v){
+  const g=S.sel.exit,T=S.teacher,pub=S.st?.exit?.[g]||{q:[]};const raw=T?exitRaw(g):null;
+  v.innerHTML=stageHead("exit","บัตรออกรายกลุ่ม")+
+  `<div class="present"><div class="glist">${SCEN.map((_,i)=>`<button data-eg="${i+1}" aria-current="${g===i+1}"><span>กลุ่ม ${i+1}</span>${S.st?.exit?.[i+1]?.done?`<span class="chip ok">ออกได้</span>`:""}</button>`).join("")}</div>
+  <div class="stack">
+   <p class="muted">สุ่มผู้ตอบทีละข้อ คนละข้อไม่ซ้ำกัน ถ้ายังไม่ผ่านให้สุ่มคนใหม่ตอบอีกครั้ง ตอบครบ 3 ข้อแล้วกลุ่มออกจากห้องได้</p>
+   ${pub.done?`<div class="leave">✓ กลุ่ม ${g} ตอบครบแล้ว ออกจากห้องได้</div>`:""}
+   ${EXITQ.map((Q,i)=>{const a=pub.q?.[i]||{};const r=raw?.q?.[i]||{};const done=["pass","partial"].includes(a.rating);
+     return `<section class="qcard ${done?"done":""}"><div class="row"><span class="qn">ข้อ ${i+1} · ${Q.clo}</span><span class="spacer"></span>${a.tries?`<span class="chip">ตอบแล้ว ${a.tries} ครั้ง</span>`:""}${done?`<span class="chip ok">${a.rating==="pass"?"ผ่าน":"ผ่านบางส่วน"}</span>`:""}</div>
+     <h3 style="font-size:20px">${h(Q.q)}</h3>
+     <div class="row"><span class="eyebrow">ผู้ตอบ</span><span class="picked" id="ea${i}" style="font-size:24px">${h(pname(a.answerer))}</span><span class="spacer"></span>${T&&!done?`<button class="btn heat" data-act="exit-spin" data-q="${i}" ${idsOf(g).length?"":"disabled"}>${r.answerer?"สุ่มคนใหม่":"สุ่มผู้ตอบ"}</button>`:""}</div>
+     ${T&&r.answerer?`<div class="rate">${[["pass","ok","ผ่าน"],["partial","warn","ผ่านบางส่วน"],["fail","bad","ยังไม่ผ่าน"]].map(([k,c,t])=>`<button class="${c}" data-act="exit-rate" data-q="${i}" data-r="${k}" aria-pressed="${r.rating===k}">${t}</button>`).join("")}</div>
+     <input type="text" id="en${i}" value="${h(r.note||"")}" placeholder="บันทึกสั้น ๆ (ไม่บังคับ)" data-note="${i}">`:""}
+     ${T?`<details><summary>แนวคำตอบสำหรับอาจารย์</summary><p class="small" style="margin-top:6px">${h(Q.key)}</p></details>`:""}</section>`}).join("")}
+  </div></div>`;
+}
+async function exitSpin(i){
+  const g=S.sel.exit,e=exitRaw(g);e.q=e.q||[{},{},{}];
+  const used=new Set(e.q.flatMap(a=>(a.tries||[]).map(t=>t.who)).concat(e.q.map(a=>a.answerer).filter(Boolean)));
+  let pool=idsOf(g).filter(id=>!used.has(id));if(!pool.length) pool=idsOf(g);
+  const pick=await spin("ea"+i,pool);if(!pick) return;
+  e.q[i]=Object.assign({},e.q[i],{answerer:pick,rating:null});e.done=false;
+  try{await call("setExit",{group:g,data:e});await load()}catch(x){toast(x.message,6000)}
+}
+async function exitRate(i,r){
+  const g=S.sel.exit,e=exitRaw(g);e.q=e.q||[{},{},{}];const a=e.q[i]||{};
+  a.rating=r;a.note=$("#en"+i)?.value||a.note||"";a.tries=(a.tries||[]).concat([{who:a.answerer,rating:r,at:Date.now()}]);e.q[i]=a;e.done=exitDone(e);
+  try{await call("setExit",{group:g,data:e});if(e.done) beep(990,300);await load()}catch(x){toast(x.message,6000)}
+}
+
+/* ---------------- 6 homework ---------------- */
+const HW_TEXT="คำนวณคาร์บอนฟุตพริ้นท์ของตนเองต่อเดือนตามตารางในสไลด์ 17 (ไฟฟ้า ก๊าซหุงต้ม ขยะ การเดินทาง) ระบุกิจกรรมที่ปล่อยก๊าซมากที่สุด และประมาณว่ามาตรการที่เลือกในบัตรออกลดได้กี่ kgCO₂e ต่อเดือน ทำลงกระดาษ A4 เขียนชื่อและรหัสนิสิตมุมขวาบน";
+function vHomework(v){
+  const due=S.st?.settings?.hwDue||"";
+  if(!S.teacher){
+    const c=S.hwCheck;
+    v.innerHTML=stageHead("homework","ส่งการบ้าน")+`<div class="grid2"><div class="panel stack"><h3>การบ้าน</h3><p>${h(HW_TEXT)}</p>${due?`<span class="chip heat">กำหนดส่ง ${h(due)}</span>`:""}</div>
+    <form class="panel stack" id="hwform"><label class="f">รหัสนิสิต<input type="text" id="sid" inputmode="numeric" autocomplete="off" maxlength="8" value="${h(S.hwId)}" placeholder="เช่น 69140011" required></label>
+      <div class="row"><button class="btn" type="button" data-act="hw-check">ตรวจสอบรหัส</button>${c?`<span class="chip ${c.submitted?"ok":"warn"}">${h(c.name)} · ${c.submitted?`ส่งแล้ว ${h(fmtTime(c.at))} (${c.pages} หน้า)`:"ยังไม่ส่ง"}</span>`:""}</div>
+      <label class="f">รูปการบ้าน (สูงสุด 3 หน้า)<input type="file" id="hwfile" accept="image/*" multiple></label>
+      <div class="pages" id="hwprev"></div>
+      <button class="btn lg heat" type="submit">ส่งการบ้าน</button>
+      <p class="small muted">ส่งใหม่ได้ ระบบจะใช้ไฟล์ชุดล่าสุด ถ่ายให้เห็นกระดาษทั้งแผ่นในที่สว่าง</p></form></div>`;
+    return;
+  }
+  const hw=S.st?.homework||{};const list=roster();const n=Object.keys(hw).length;const gOf={};(S.st?.groupIds||[]).forEach((m,i)=>m.forEach(id=>gOf[id]=i+1));
+  v.innerHTML=stageHead("homework","ส่งการบ้าน",`<a class="btn" href="${SHEET_URL}" target="_blank" rel="noopener">เปิดตารางบันทึก</a>`)+
+  `<div class="stack"><div class="grid2"><div class="panel stack"><h3>โจทย์การบ้าน</h3><p>${h(HW_TEXT)}</p>
+     <form class="row" id="dueform"><label class="f" style="flex:1">กำหนดส่ง (แสดงให้นิสิตเห็น)<input type="text" id="hwdue" value="${h(due)}" placeholder="เช่น ก่อนเริ่มคาบสัปดาห์ที่ 8"></label><button class="btn" type="submit" style="align-self:flex-end">บันทึก</button></form></div>
+   <form class="panel stack" id="hwforform"><h3>ส่งแทนนิสิต</h3><p class="small muted">ใช้เมื่อนิสิตส่งรูปมาทางช่องทางอื่น</p>
+     <label class="f">นิสิต<select id="hwfor" required><option value="">เลือกนิสิต</option>${list.map(r=>`<option value="${h(r.id)}">${h(r.name)} (${h(r.id)})</option>`).join("")}</select></label>
+     <label class="f">รูปการบ้าน<input type="file" id="hwfilefor" accept="image/*" multiple required></label><button class="btn heat" type="submit">ส่งแทน</button></form></div>
+   <div class="row"><span class="chip ${n===list.length?"ok":"warn"}">ส่งแล้ว ${n} / ${list.length} คน</span><span class="chip">ยังไม่ส่ง ${list.length-n} คน</span></div>
+   <div class="panel tablewrap"><table><thead><tr><th>#</th><th>รหัส</th><th>ชื่อ-สกุล</th><th>กลุ่ม</th><th>ส่งเมื่อ</th><th>ไฟล์</th></tr></thead><tbody>
+   ${list.map((r,i)=>{const x=hw[r.id];return `<tr><td class="mono">${i+1}</td><td class="mono">${h(r.id)}</td><td>${h(r.name)}</td><td class="mono">${gOf[r.id]||"-"}</td>
+     <td class="small">${x?h(fmtTime(x.at))+(x.by==="teacher"?" · ส่งแทน":""):`<span class="chip">ยังไม่ส่ง</span>`}</td>
+     <td class="small">${x?x.files.map((id,k)=>`<a href="${fileUrl(id)}" target="_blank" rel="noopener">หน้า ${k+1}</a>`).join(" · "):""}</td></tr>`}).join("")}
+   </tbody></table></div></div>`;
+}
+async function hwSubmit(files,sid,byTeacher){
+  sid=String(sid||"").trim();if(!/^\d{8}$/.test(sid)) return toast("รหัสนิสิตต้องเป็นตัวเลข 8 หลัก",5000);
+  files=[...(files||[])].slice(0,3);if(!files.length) return toast("ยังไม่ได้เลือกรูป",4000);
+  S.busy=true;
+  try{toast("กำลังส่งการบ้าน…",60000);const images=[];for(const f of files){const b=await compress(f,2000,.85);images.push({mime:"image/jpeg",data:await b64(b)})}
+    const j=await call("submitHomework",{studentId:sid,images,by:byTeacher?"teacher":"student"});
+    if(!byTeacher){S.hwId=sid;try{localStorage.setItem("cc-sid",sid)}catch(e){}S.hwCheck={name:j.name,submitted:true,at:Date.now(),pages:j.pages}}
+    toast(`ส่งการบ้านของ ${j.name} แล้ว (${j.pages} หน้า)`,5000);
+  }catch(e){toast(e.message,7000)}finally{S.busy=false;S.teacher?load():render()}
+}
+
+/* ---------------- events ---------------- */
+document.addEventListener("click",async ev=>{
+  const t=ev.target.closest("[data-go],[data-act],[data-slide],[data-wg],[data-pg],[data-eg]");if(!t) return;
+  if(t.dataset.go){if(t.dataset.go==="home"){history.replaceState(null,"",location.pathname+location.search);render()}else location.hash=t.dataset.go;return}
+  if(t.dataset.slide){S.sel.slide=+t.dataset.slide;return render()}
+  if(t.dataset.wg){S.sel.work=+t.dataset.wg;S.edit=null;return render()}
+  if(t.dataset.pg){S.sel.present=+t.dataset.pg;return render()}
+  if(t.dataset.eg){S.sel.exit=+t.dataset.eg;return render()}
+  const a=t.dataset.act,g=S.sel.present;
+  switch(a){
+    case "login":$("#login").hidden=false;$("#tkey").focus();return;
+    case "logout":S.key="";S.teacher=false;try{localStorage.removeItem("cc-tk")}catch(e){}return load();
+    case "reload":S.loading=true;render();return load();
+    case "groups-shuffle":return doShuffle();
+    case "groups-lock":return lockGroups();
+    case "groups-unlock":S.confirmUnlock=true;return render();
+    case "groups-unlock-no":S.confirmUnlock=false;return render();
+    case "groups-unlock-yes":S.confirmUnlock=false;S.draft=S.st?.groupIds||null;try{await call("unlockGroups")}catch(e){toast(e.message,6000)}return load();
+    case "slide-prev":S.sel.slide=Math.max(0,S.sel.slide-1);return render();
+    case "slide-next":S.sel.slide=Math.min(MOCK.length-1,S.sel.slide+1);return render();
+    case "slide-fs":return fs($("#slidestage"));
+    case "slides-mock":try{await call("clearSlides")}catch(e){toast(e.message,6000)}return load();
+    case "work-edit":S.edit=S.edit?null:structuredClone(W(S.sel.work).ex||blankEx());while(S.edit&&S.edit.chain.length<5) S.edit.chain.push("");return render();
+    case "ch-add":readEditor();S.edit.chain.push("");return renderEditor();
+    case "ch-del":readEditor();S.edit.chain.pop();return renderEditor();
+    case "work-make":return makeAndSend();
+    case "spin-presenter":{const pick=await spin("pp",idsOf(g));if(pick) await savePresent({presenter:pick});return}
+    case "spin-asker":{const pick=await spin("pa",idsOf(askerOf(g)));if(pick) await savePresent({asker:pick,askerGroup:askerOf(g),pattern:patternOf(askerOf(g))});return}
+    case "present-done":return savePresent({done:true});
+    case "present-undone":return savePresent({done:false});
+    case "present-next":S.sel.present=Math.min(9,g+1);S.timer={phase:"idle",total:0,left:0,endAt:0,running:false};return render();
+    case "present-fs":return fs($("#pstage"));
+    case "t-present":return tStart("present");
+    case "t-qa":return tStart("qa");
+    case "t-pause":{const T=S.timer;if(T.running){T.left=Math.max(0,(T.endAt-Date.now())/1000);T.running=false}else{T.endAt=Date.now()+T.left*1000;T.running=T.left>0}return paintTimer()}
+    case "t-add":{const T=S.timer;if(T.running) T.endAt+=30000;else{T.left+=30;T.endAt=Date.now()+T.left*1000;T.running=true;T.beeped=false}T.total+=30;return paintTimer()}
+    case "t-reset":S.timer={phase:"idle",total:0,left:0,endAt:0,running:false};return paintTimer();
+    case "exit-spin":return exitSpin(+t.dataset.q);
+    case "exit-rate":return exitRate(+t.dataset.q,t.dataset.r);
+    case "hw-check":{const sid=$("#sid")?.value.trim();if(!/^\d{8}$/.test(sid||"")) return toast("รหัสนิสิตต้องเป็นตัวเลข 8 หลัก",5000);
+      try{S.hwId=sid;S.hwCheck=await call("checkHomework",{studentId:sid});try{localStorage.setItem("cc-sid",sid)}catch(e){}render()}catch(e){S.hwCheck=null;toast(e.message,6000)}return}
+  }
+});
+document.addEventListener("submit",async ev=>{
+  ev.preventDefault();const f=ev.target;
+  if(f.id==="loginform"){const k=$("#tkey").value;S.key=k;try{const j=await call("checkKey");if(!j.ok) throw new Error()}catch(e){S.key="";return toast("รหัสอาจารย์ไม่ถูกต้อง",4000)}
+    try{localStorage.setItem("cc-tk",k)}catch(e){}$("#login").hidden=true;$("#tkey").value="";toast("เข้าสู่โหมดอาจารย์แล้ว");return load()}
+  if(f.id==="linkform"){const l=$("#slidelink").value.trim();if(!l) return;try{toast("กำลังตั้งค่าไฟล์สไลด์…",8000);await call("setSlidesLink",{link:l});toast("ใช้ไฟล์สไลด์นี้แล้ว")}catch(e){toast(e.message,6000)}return load()}
+  if(f.id==="hwform") return hwSubmit($("#hwfile").files,$("#sid").value,false);
+  if(f.id==="hwforform") return hwSubmit($("#hwfilefor").files,$("#hwfor").value,true);
+  if(f.id==="dueform"){try{await call("setSettings",{data:{hwDue:$("#hwdue").value}});toast("บันทึกกำหนดส่งแล้ว")}catch(e){toast(e.message,6000)}return load()}
+});
+$("#logincancel").addEventListener("click",()=>{$("#login").hidden=true});
+document.addEventListener("change",async ev=>{
+  const t=ev.target;
+  if(t.id==="slidefile"&&t.files[0]) return uploadSlides(t.files[0]);
+  if(t.id==="photofile"&&t.files[0]){try{const b=await compress(t.files[0]);sendWork("photo",b,"image/jpeg")}catch(e){toast(e.message,6000)}return}
+  if(t.id==="slideimg"&&t.files[0]){try{const b=await compress(t.files[0],2400,.9);sendWork("slide",b,"image/jpeg",{source:"upload"})}catch(e){toast(e.message,6000)}return}
+  if(t.id==="hwfile"){const p=$("#hwprev");if(p) p.innerHTML=[...t.files].slice(0,3).map((f,k)=>`<img src="${URL.createObjectURL(f)}" alt="หน้า ${k+1}">`).join("");return}
+  if(t.id==="durp") S.dur.p=Math.max(30,+t.value||120);
+  if(t.id==="durq") S.dur.q=Math.max(30,+t.value||60);
+  if(t.dataset.note!=null){const i=+t.dataset.note,g=S.sel.exit,e=exitRaw(g);e.q=e.q||[{},{},{}];e.q[i]=Object.assign({},e.q[i],{note:t.value});try{await call("setExit",{group:g,data:e})}catch(x){toast(x.message,6000)}}
+});
+document.addEventListener("input",ev=>{if(!ev.target.closest("#editor")) return;readEditor();
+  if(/^(cq|cef|cr)$/.test(ev.target.id)){const e=S.edit,s=SCEN[S.sel.work-1],q=parseFloat(e.calc.quantity),f=parseFloat(e.calc.ef||s.efv),n=$("#calcnote");if(n&&isFinite(q)&&isFinite(f)) n.textContent=`ตรวจ: ${q} × ${f} = ${(q*f).toFixed(2)} kgCO₂e`}});
+document.addEventListener("keydown",ev=>{if(route()!=="slides"||S.st?.slides||/INPUT|TEXTAREA|SELECT/.test(ev.target.tagName)) return;
+  if(ev.key==="ArrowRight"||ev.key==="PageDown"){S.sel.slide=Math.min(MOCK.length-1,S.sel.slide+1);render()}
+  if(ev.key==="ArrowLeft"||ev.key==="PageUp"){S.sel.slide=Math.max(0,S.sel.slide-1);render()}});
+addEventListener("hashchange",()=>{S.edit=null;render();scrollTo(0,0)});
+
+/* ---------------- boot ---------------- */
+renderStripes();render();if(API) load();
+})();
+</script>
+</body>
+</html>

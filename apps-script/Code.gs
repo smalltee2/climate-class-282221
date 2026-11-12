@@ -5,7 +5,7 @@
  * climate_change_topic 282121 ใน Google Drive ของอาจารย์
  *
  * ตั้งค่าครั้งแรก (ทำครั้งเดียว):
- *   1) แก้ 'ใส่รหัสอาจารย์ที่นี่' ในฟังก์ชัน setup() ให้เป็นรหัสผ่านโหมดอาจารย์
+ *   1) แก้ข้อความในบรรทัด const key = '...' ของฟังก์ชัน setup() ให้เป็นรหัสผ่านโหมดอาจารย์ (แก้บรรทัดเดียว)
  *   2) เลือกฟังก์ชัน setup แล้วกด Run (อนุญาตสิทธิ์ Drive/Sheets เมื่อถูกถาม)
  *   3) ลบรหัสที่พิมพ์ไว้ใน setup() ออกได้เลย รหัสถูกเก็บใน Script Properties แล้ว
  *   4) Deploy > New deployment > Web app: Execute as = Me, Who has access = Anyone
@@ -35,7 +35,7 @@ const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
 /* ---------- setup ---------- */
 function setup() {
   const key = 'ใส่รหัสอาจารย์ที่นี่';
-  if (!key || key === 'ใส่รหัสอาจารย์ที่นี่') throw new Error('แก้รหัสอาจารย์ในฟังก์ชัน setup() ก่อนกด Run');
+  if (!key || key.indexOf('ใส่รหัส') === 0) throw new Error('แก้รหัสอาจารย์ในฟังก์ชัน setup() ก่อนกด Run');
   PropertiesService.getScriptProperties().setProperty('TEACHER_KEY', key);
   kvSheet_();
   DriveApp.getFolderById(FOLDERS.work); // ขอสิทธิ์ Drive ตั้งแต่ตอนนี้

@@ -161,8 +161,7 @@ td.mono{font-family:var(--mono);font-size:13px}
   <header>
     <div class="top">
       <div class="meta">
-        <span class="eyebrow">282221 · สัปดาห์ที่ 7 · นิสิต 53 คน · 9 กลุ่ม</span>
-        <h1>ห้องเรียน การเปลี่ยนแปลงสภาพภูมิอากาศ</h1>
+        <h1>หัวข้อ การเปลี่ยนแปลงสภาพภูมิอากาศ</h1>
       </div>
       <div class="who" id="who"></div>
     </div>
@@ -320,8 +319,7 @@ function statusOf(r){
   }
 }
 function vHome(v){
-  v.innerHTML=`<p class="muted" style="margin-top:24px;max-width:70ch">ขั้นตอนเรียงตามลำดับในคาบ กดการ์ดเพื่อเปิดแต่ละขั้น ไฟล์ทุกชิ้นเก็บใน Google Drive ของอาจารย์โดยอัตโนมัติ</p>
-  ${S.err?`<div class="notice bad" style="margin-top:16px">${h(S.err)} <button class="btn" data-act="reload">ลองใหม่</button></div>`:""}
+  v.innerHTML=`${S.err?`<div class="notice bad" style="margin-top:16px">${h(S.err)} <button class="btn" data-act="reload">ลองใหม่</button></div>`:""}
   <div class="steps">${STEPS.map(s=>{const [k,t]=statusOf(s.r);return `<button class="step" data-go="${s.r}"><span class="num">ขั้นที่ ${s.n}</span><h3>${h(s.t)}</h3><p>${h(s.d)}</p><span class="chip ${k}">${h(t)}</span></button>`}).join("")}</div>`;
 }
 
@@ -340,7 +338,7 @@ function vGroups(v){
      :`<button class="btn lg heat" data-act="groups-shuffle">${show?"สุ่มใหม่":"สุ่มกลุ่ม"}</button><button class="btn lg primary" data-act="groups-lock" ${S.draft?"":"disabled"}>ล็อกกลุ่มและบันทึก</button>`):"";
   v.innerHTML=stageHead("groups","สุ่มจัดกลุ่ม",extra)+
   (S.confirmUnlock?`<div class="notice warn row" style="margin-bottom:14px"><span>ยกเลิกการล็อกเพื่อสุ่มใหม่ งานที่ส่งแล้วยังผูกกับหมายเลขกลุ่มเดิม ยืนยันหรือไม่</span><span class="spacer"></span><button class="btn" data-act="groups-unlock-no">ไม่ยกเลิก</button><button class="btn heat" data-act="groups-unlock-yes">ยืนยัน</button></div>`:"")+
-  (!show?`<div class="panel stack"><p>สุ่มแบบคละหลักสูตร (ป.ตรี และ ป.ตรี-โท) และเพศ แจกเข้า 9 กลุ่ม ได้กลุ่มละ 6 คน 8 กลุ่ม และ 5 คน 1 กลุ่ม</p>${S.teacher?"":"<p class='muted'>อาจารย์ยังไม่ได้จัดกลุ่ม</p>"}</div>`:
+  (!show?(S.teacher?"":`<div class="panel"><p class="muted">อาจารย์ยังไม่ได้จัดกลุ่ม</p></div>`):
    `${S.draft?`<div class="notice warn" style="margin-bottom:14px">ผลสุ่มนี้ยังไม่บันทึก กด “ล็อกกลุ่มและบันทึก” เมื่อพอใจ</div>`:""}
    <div class="grid3" id="glist">${show.map((m,i)=>`<article class="gcard"><header><span class="gnum">กลุ่ม ${i+1}</span><span class="chip">${m.length} คน</span></header>
    <div class="scen">${h(SCEN[i].t)}</div><ul class="members">${m.map(p=>`<li><span>${h(p.name)}</span>${p.id?`<span class="sid">${h(p.id)}</span>`:""}</li>`).join("")}</ul></article>`).join("")}</div>`);

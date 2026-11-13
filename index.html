@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>ห้องเรียน Climate Change 282221</title>
-<meta name="description" content="ห้องเรียนรายวิชา 282221 สัปดาห์ที่ 7 การเปลี่ยนแปลงสภาพภูมิอากาศ: จัดกลุ่ม สไลด์ งานกลุ่ม นำเสนอ บัตรออก และส่งการบ้าน">
+<title>การเปลี่ยนแปลงสภาพภูมิอากาศ 282121</title>
+<meta name="description" content="ห้องเรียนรายวิชา 282121 สัปดาห์ที่ 7 การเปลี่ยนแปลงสภาพภูมิอากาศ: จัดกลุ่ม สไลด์ งานกลุ่ม นำเสนอ บัตรออก และส่งการบ้าน">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
@@ -157,6 +157,19 @@ td.mono{font-family:var(--mono);font-size:13px}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:10px;font-weight:600;z-index:20;max-width:calc(100% - 32px)}
 .modal{position:fixed;inset:0;background:rgba(10,16,22,.45);display:flex;align-items:center;justify-content:center;padding:16px;z-index:30}
 .modal .panel{width:min(420px,100%)}
+/* Cover page: the warming stripes are the backdrop band, course details set as a title page */
+.cover{min-height:calc(100vh - 68px);display:flex;flex-direction:column;justify-content:center;gap:28px;padding-block:24px}
+.cover-band{display:flex;height:clamp(90px,18vh,170px);border-radius:10px;overflow:hidden}
+.cover-band i{flex:1;display:block}
+.cover-band-cap{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted);margin-top:-20px;font-variant-numeric:tabular-nums}
+.cover-course{font-family:var(--display);font-weight:600;font-size:clamp(18px,2.4vw,26px);color:var(--muted)}
+.cover-course b{font-family:var(--mono);font-weight:600;color:var(--heat);margin-right:10px}
+.cover-title{font-family:var(--display);font-weight:700;font-size:clamp(40px,7.5vw,92px);line-height:1.08;letter-spacing:-.01em}
+.cover-meta{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 18px;font-size:clamp(16px,1.8vw,20px);max-width:760px}
+.cover-meta dt{color:var(--muted);font-weight:500}
+.cover-meta dd{margin:0;font-weight:600}
+.cover .btn.lg{align-self:flex-start;font-size:20px;padding:14px 28px;min-height:58px}
+@media (max-width:560px){.cover-meta{grid-template-columns:1fr}.cover-meta dd{margin-bottom:8px}}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -215,7 +228,7 @@ const EXITQ=[
   key:"Mitigation = ลดการปล่อยหรือเพิ่มการดูดกลับ · Adaptation = รับมือผลกระทบ · มาตรการต้องเจาะจง ทำได้จริง เช่น ตั้งแอร์ 26 °C ปิดเมื่อออกจากห้อง"}
 ];
 const MOCK=[["เปิดบท","การเปลี่ยนแปลงสภาพภูมิอากาศ ภาวะโลกร้อน ก๊าซเรือนกระจก และคาร์บอนฟุตพริ้นท์"],["เนื้อหาวันนี้","8 หัวข้อของคาบ"],["01 · Weather vs Climate","Weather คือวันนี้ Climate คือภาพระยะยาว"],["01 · ความเข้าใจผิด","สามความเชื่อที่ต้องแก้ให้ถูก"],["02 · ปรากฏการณ์เรือนกระจก","ผ้าห่มบาง ๆ ที่ทำให้โลกอยู่อาศัยได้"],["02 · ส่วนที่มนุษย์เพิ่ม","มนุษย์ทำให้ “ผ้าห่ม” หนาขึ้น"],["03 · ก๊าซเรือนกระจกหลัก","สามก๊าซหลัก ความแรงต่างกันมาก"],["03 · แหล่งที่มา","ก๊าซแต่ละชนิดมาจากไหน"],["04 · NOAA Mauna Loa","CO₂ ในบรรยากาศยังเพิ่มขึ้นทุกปี"],["04 · NASA GISTEMP","อุณหภูมิผิวโลกสูงเป็นประวัติการณ์"],["04 · BTR1 ของไทย","ภาคพลังงานปล่อยราวสองในสามของประเทศ"],["05 · ผลกระทบ","ผลกระทบที่เกิดขึ้นแล้ว ไม่ใช่อนาคต"],["06 · แนวทางรับมือ","สองแนวทางที่ต้องทำควบคู่กัน"],["06 · ตัวอย่าง","ทำอะไรได้บ้างตั้งแต่วันนี้"],["07 · CO₂e","แปลงทุกก๊าซให้เป็น “สกุลเงินเดียวกัน”"],["07 · Emission Factor","การปล่อย = ข้อมูลกิจกรรม × EF"],["07 · ตัวอย่างการคำนวณ","บ้านหนึ่งหลังปล่อยเท่าไรใน 1 เดือน"],["08 · นิยาม","สองคำที่ฟังคล้ายกัน แต่ขอบเขตต่างกัน"],["08 · เป้าหมายประเทศ","ไทยเลื่อนเป้า Net Zero เร็วขึ้นเป็นปี 2050"],["08 · บุคคลกับประเทศ","ตัวเลขประเทศ คือผลรวมของการตัดสินใจรายวัน"],["สรุปบทเรียน","ห้าประเด็นที่ควรจำ"],["แหล่งข้อมูล","เอกสารอ้างอิง"]];
-const ROUTES=["home","groups","slides","work","present","exit","homework"];
+const ROUTES=["landing","steps","groups","slides","work","present","exit","homework"];
 const STEPS=[
  {r:"groups",n:"01",t:"สุ่มจัดกลุ่ม",d:"สุ่มนิสิต 53 คนเป็น 9 กลุ่ม คละหลักสูตรและเพศ พร้อมสถานการณ์ประจำกลุ่ม"},
  {r:"slides",n:"02",t:"สไลด์บรรยาย",d:"สไลด์ตัวอย่าง 22 หน้า อาจารย์อัปโหลดไฟล์จริงทับได้ทุกเมื่อ"},
@@ -304,9 +317,9 @@ function renderWho(){
   else c.push(`<button class="btn ghost" data-act="login">โหมดอาจารย์</button>`);
   $("#who").innerHTML=c.join("");
 }
-function route(){const r=(location.hash||"").slice(1);return ROUTES.includes(r)?r:"home"}
+function route(){const r=(location.hash||"").slice(1);if(r==="home") return "steps";return ROUTES.includes(r)?r:"landing"}
 function stageHead(r,title,extra=""){
-  return `<div class="stagehead"><button class="back" data-go="home">← ทุกขั้นตอน</button><span class="spacer"></span>
+  return `<div class="stagehead"><button class="back" data-go="steps">← ทุกขั้นตอน</button><span class="spacer"></span>
   <nav class="stepnav" aria-label="ขั้นตอน">${STEPS.map(s=>`<a href="#${s.r}" ${s.r===r?'aria-current="page"':""}>${s.n} ${h(s.t)}</a>`).join("")}</nav></div>
   <div class="row" style="margin-bottom:18px"><h2>${h(title)}</h2><span class="spacer"></span>${extra}</div>`;
 }
@@ -317,9 +330,11 @@ function render(quiet){
   if(quiet&&r===lastRoute&&(r==="work"&&S.edit||r==="homework"&&!S.teacher)){if(r==="work") renderWorkTiles();return}
   lastRoute=r;renderWho();
   const v=$("#view");
+  document.querySelector("body>.wrap>header").hidden=(r==="landing");
+  if(r==="landing") return vLanding(v);
   if(!API){v.innerHTML=`<div class="notice warn" style="margin-top:24px">ยังไม่ได้ตั้งค่า URL ของ Google Apps Script ใส่ค่า apiUrl ในไฟล์ config.js ตามขั้นตอนใน README</div>`;return}
   if(S.loading&&!S.st){v.innerHTML=`<p class="muted" style="margin-top:24px">กำลังโหลดข้อมูลห้องเรียน…</p>`;return}
-  ({home:vHome,groups:vGroups,slides:vSlides,work:vWork,present:vPresent,exit:vExit,homework:vHomework})[r](v);
+  ({steps:vHome,groups:vGroups,slides:vSlides,work:vWork,present:vPresent,exit:vExit,homework:vHomework})[r](v);
 }
 function statusOf(r){
   const st=S.st||{};
@@ -332,8 +347,18 @@ function statusOf(r){
     case "homework":{if(!S.teacher) return ["","ส่งด้วยรหัสนิสิต"];const n=Object.keys(st.homework||{}).length;return [n===53?"ok":n?"warn":"",`ส่งแล้ว ${n}/53 คน`]}
   }
 }
+function vLanding(v){
+  v.innerHTML=`<section class="cover" aria-labelledby="cover-title">
+    <div class="cover-course"><b>282121</b>การจัดการพลังงานและสิ่งแวดล้อมเบื้องต้น</div>
+    <div class="stack" style="gap:6px"><span class="eyebrow">หัวข้อ</span><h1 class="cover-title" id="cover-title">การเปลี่ยนแปลงสภาพภูมิอากาศ</h1></div>
+    <dl class="cover-meta"><dt>ผู้สอน</dt><dd>รองศาสตราจารย์ ดร.ธีรชัย อำนวยล้อเจริญ</dd><dt>สังกัด</dt><dd>คณะพลังงานและสิ่งแวดล้อม มหาวิทยาลัยพะเยา</dd></dl>
+    <a class="btn lg primary" href="#steps">เข้าสู่ห้องเรียน →</a>
+    <div><div class="cover-band" role="img" aria-label="แถบสีผลต่างอุณหภูมิเฉลี่ยผิวโลก ปี 1880 ถึง 2025 จาก NASA GISTEMP">${STRIPES.map(x=>`<i style="background:${stripeColor(x)}"></i>`).join("")}</div></div>
+    <div class="cover-band-cap"><span>1880</span><span>ผลต่างอุณหภูมิโลกเทียบค่าเฉลี่ย 1951–1980 (NASA GISTEMP)</span><span>2025</span></div>
+  </section>`;
+}
 function vHome(v){
-  v.innerHTML=`${S.err?`<div class="notice bad" style="margin-top:16px">${h(S.err)} <button class="btn" data-act="reload">ลองใหม่</button></div>`:""}
+  v.innerHTML=`<div class="stagehead"><button class="back" data-go="landing">← หน้าหลัก</button></div>${S.err?`<div class="notice bad" style="margin-top:16px">${h(S.err)} <button class="btn" data-act="reload">ลองใหม่</button></div>`:""}
   <div class="steps">${STEPS.map(s=>{const [k,t]=statusOf(s.r);return `<button class="step" data-go="${s.r}"><span class="num">ขั้นที่ ${s.n}</span><h3>${h(s.t)}</h3><p>${h(s.d)}</p><span class="chip ${k}">${h(t)}</span></button>`}).join("")}</div>
   ${S.teacher?resetPanel():""}`;
 }
@@ -522,7 +547,7 @@ async function makeSlideImage(g,e){
       }else fitText(x,e.calc.result||"—",ix,iy,iw,ih,28,400,INK);
     }
   });
-  x.fillStyle=MUT;x.font='400 20px "IBM Plex Sans Thai"';x.fillText("282221 · สัปดาห์ที่ 7 · ภาพนี้สร้างจากข้อความที่กลุ่มพิมพ์",80,H-50);
+  x.fillStyle=MUT;x.font='400 20px "IBM Plex Sans Thai"';x.fillText("282121 · สัปดาห์ที่ 7 · ภาพนี้สร้างจากข้อความที่กลุ่มพิมพ์",80,H-50);
   return await new Promise(r=>c.toBlob(r,"image/png"));
 }
 async function makeAndSend(){
@@ -647,7 +672,7 @@ async function hwSubmit(files,sid,byTeacher){
 /* ---------------- events ---------------- */
 document.addEventListener("click",async ev=>{
   const t=ev.target.closest("[data-go],[data-act],[data-slide],[data-wg],[data-pg],[data-eg]");if(!t) return;
-  if(t.dataset.go){if(t.dataset.go==="home"){history.replaceState(null,"",location.pathname+location.search);render()}else location.hash=t.dataset.go;return}
+  if(t.dataset.go){if(t.dataset.go==="landing"){history.replaceState(null,"",location.pathname+location.search);render();scrollTo(0,0)}else location.hash=t.dataset.go;return}
   if(t.dataset.slide){S.sel.slide=+t.dataset.slide;return render()}
   if(t.dataset.wg){S.sel.work=+t.dataset.wg;S.edit=null;return render()}
   if(t.dataset.pg){S.sel.present=+t.dataset.pg;return render()}

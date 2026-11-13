@@ -531,9 +531,9 @@ function vPresent(v){
          ${T?`<div class="phase" id="phase"></div><div class="clock" id="clock">0:00</div><div class="bar" id="bar"><i style="width:0%"></i></div><div class="row" id="tbtns"></div>`:`<p class="muted">อาจารย์ควบคุมเวลาจากหน้าจอหลัก</p>`}</div>
        <div class="stack">
          <div class="panel stack"><span class="eyebrow">ผู้นำเสนอ (สุ่มจากกลุ่ม ${g})</span><div class="picked" id="pp">${h(pname(p.presenter))}</div>${T?`<button class="btn heat" data-act="spin-presenter" ${idsOf(g).length?"":"disabled"}>สุ่มผู้นำเสนอ</button>`:""}</div>
-         <div class="panel stack"><span class="eyebrow">ผู้ถาม (สุ่มจากกลุ่ม ${ag}) · แบบ ${pat} ${PATTERN[pat].name}</span><div class="picked" id="pa">${h(pname(p.asker))}</div>${T?`<button class="btn cool" data-act="spin-asker" ${idsOf(ag).length?"":"disabled"}>สุ่มผู้ถาม</button>`:""}</div>
+         <div class="panel stack"><span class="eyebrow">ผู้ถาม (สุ่มจากกลุ่ม ${ag})</span><div class="picked" id="pa">${h(pname(p.asker))}</div>${T?`<button class="btn cool" data-act="spin-asker" ${idsOf(ag).length?"":"disabled"}>สุ่มผู้ถาม</button>`:""}</div>
        </div></div>
-     <div class="qtpl"><b>ส่วนที่ 1 (ทุกกลุ่ม):</b> “มาตรการ <span class="blank"></span> ของกลุ่ม ${g} เป็น [Mitigation / Adaptation] เพราะ <span class="blank"></span>”<br><b>ส่วนที่ 2 · แบบ ${pat} ${PATTERN[pat].name}:</b> “${h(PATTERN[pat].tpl).replace(/____/g,'<span class="blank"></span>')}”</div>
+     <div class="qtpl"><b>ผู้ถามพูดว่า:</b> “มาตรการ <span class="blank"></span> ของกลุ่ม ${g} เป็น [Mitigation / Adaptation] เพราะ <span class="blank"></span>”</div>
      <div class="slidebox">${f?`<img src="${img(f,1920)}" alt="ภาพนำเสนอกลุ่ม ${g}">`:`<span class="muted">กลุ่ม ${g} ยังไม่ได้ส่งภาพนำเสนอ</span>`}</div>
      ${T?`<div class="row"><button class="btn" data-act="present-fs">${fsLabel()}</button><span class="spacer"></span>${p.done?`<span class="chip ok">นำเสนอแล้ว</span><button class="btn ghost" data-act="present-undone">ยกเลิกเครื่องหมาย</button>`:`<button class="btn primary" data-act="present-done">จบกลุ่มนี้</button>`}${g<9?`<button class="btn" data-act="present-next">กลุ่มถัดไป →</button>`:""}</div>`:""}
    </div></div>`;

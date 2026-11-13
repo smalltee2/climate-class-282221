@@ -101,8 +101,12 @@ button{cursor:pointer}
 .thumbs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}
 .thumbs button{flex:0 0 auto;width:120px;aspect-ratio:16/9;border:1px solid var(--line);border-radius:6px;background:var(--surface);font-size:11px;text-align:left;padding:6px;overflow:hidden;line-height:1.3;color:var(--muted)}
 .thumbs button[aria-current="true"]{border:2px solid var(--heat);color:var(--ink)}
-.fsable:fullscreen{background:var(--bg);padding:24px;overflow:auto;display:flex;flex-direction:column;justify-content:center}
-.fsable:fullscreen .slidebox{border:none;border-radius:0;max-height:calc(100vh - 48px)}
+/* Fullscreen: the whole page goes fullscreen so data refreshes never drop it; chrome is hidden */
+body[data-fs] header,body[data-fs] .stagehead,body[data-fs] .stagehead + .row,body[data-fs] #toast{display:none!important}
+body[data-fs] .wrap{max-width:none;padding-block:16px}
+body[data-fs="slides"] #linkform,body[data-fs="slides"] .notice,body[data-fs="slides"] .thumbs,body[data-fs="slides"] #slidestage>.small{display:none}
+body[data-fs="slides"] .slidebox{width:auto;height:calc(100vh - 100px);margin:0 auto;border:none;border-radius:0}
+body[data-fs="present"] .present .slidebox{max-height:72vh}
 .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
 .tile{display:flex;flex-direction:column;gap:6px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;min-height:120px;color:var(--ink)}
 .tile[aria-pressed="true"]{border:2px solid var(--ink)}
@@ -260,7 +264,17 @@ async function compress(file,max=1800,q=.85){
 const b64=blob=>new Promise((res,rej)=>{const fr=new FileReader();fr.onload=()=>res(String(fr.result).split(",")[1]);fr.onerror=rej;fr.readAsDataURL(blob)});
 function beep(freq=880,ms=350){try{const A=beep.ctx||(beep.ctx=new (window.AudioContext||window.webkitAudioContext)());const o=A.createOscillator(),g=A.createGain();o.frequency.value=freq;o.connect(g);g.connect(A.destination);g.gain.setValueAtTime(.2,A.currentTime);g.gain.exponentialRampToValueAtTime(.001,A.currentTime+ms/1000);o.start();o.stop(A.currentTime+ms/1000)}catch(e){}}
 async function wake(){try{S.wl=await navigator.wakeLock?.request("screen")}catch(e){}}
-function fs(el){if(!el) return;try{if(document.fullscreenElement) document.exitFullscreen();else el.requestFullscreen?.().catch(()=>toast("เบราว์เซอร์นี้เปิดเต็มจอไม่ได้"))}catch(e){toast("เบราว์เซอร์นี้เปิดเต็มจอไม่ได้")}}
+function fs(mode){
+  try{
+    if(document.fullscreenElement){document.exitFullscreen();return}
+    document.body.dataset.fs=mode;
+    const r=document.documentElement.requestFullscreen?.();
+    if(!r){delete document.body.dataset.fs;toast("เบราว์เซอร์นี้เปิดเต็มจอไม่ได้");return}
+    r.catch(()=>{delete document.body.dataset.fs;toast("เบราว์เซอร์นี้เปิดเต็มจอไม่ได้")});
+  }catch(e){delete document.body.dataset.fs;toast("เบราว์เซอร์นี้เปิดเต็มจอไม่ได้")}
+}
+document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement) delete document.body.dataset.fs;render()});
+const fsLabel=()=>document.fullscreenElement?"ออกจากเต็มจอ":"เต็มจอ";
 
 /* ---------------- API ---------------- */
 async function call(action,data={}){
@@ -357,14 +371,14 @@ async function lockGroups(){
 function vSlides(v){
   const sl=S.st?.slides;const i=Math.min(S.sel.slide,MOCK.length-1);
   v.innerHTML=stageHead("slides","สไลด์บรรยาย",S.teacher?`<label class="btn filebtn">อัปโหลดสไลด์ (PDF/PPTX)<input type="file" id="slidefile" accept=".pdf,.pptx,application/pdf,application/vnd.openxmlformats-officedocument.presentationml.presentation"></label>${sl?`<button class="btn ghost" data-act="slides-mock">กลับไปใช้สไลด์ตัวอย่าง</button>`:""}`:"")+
-  `<div class="stack fsable" id="slidestage">
+  `<div class="stack" id="slidestage">
    ${S.teacher?`<form class="row" id="linkform"><input type="text" id="slidelink" placeholder="หรือวางลิงก์ไฟล์สไลด์จาก Google Drive" style="flex:1;min-width:220px"><button class="btn" type="submit">ใช้ไฟล์นี้</button></form>`:""}
    ${sl?`<div class="row small muted"><span>${h(sl.name||"สไลด์")}</span><a href="${fileUrl(sl.fileId)}" target="_blank" rel="noopener">เปิดใน Google Drive</a></div>
       <div class="slidebox"><iframe src="https://drive.google.com/file/d/${encodeURIComponent(sl.fileId)}/preview" allow="fullscreen" allowfullscreen title="สไลด์บรรยาย"></iframe></div>
-      <div class="row"><span class="spacer"></span><button class="btn primary" data-act="slide-fs">เต็มจอ</button></div>`
+      <div class="row"><span class="spacer"></span><button class="btn primary" data-act="slide-fs">${fsLabel()}</button></div>`
    :`<div class="notice warn">กำลังแสดงสไลด์ตัวอย่าง (mockup) ${MOCK.length} หน้าตามโครงของสไลด์จริง${S.teacher?" อัปโหลดไฟล์ PDF หรือ PPTX หรือวางลิงก์ Google Drive เพื่อแทนที่":""}</div>
      <div class="slidebox"><div class="mock"><span class="chip warn tag">ตัวอย่าง</span><span class="sec">${h(MOCK[i][0])}</span><span class="t">${h(MOCK[i][1])}</span><span class="pg">${i+1} / ${MOCK.length}</span></div></div>
-     <div class="row"><button class="btn" data-act="slide-prev" ${i<=0?"disabled":""}>← ก่อนหน้า</button><span class="muted" style="font-family:var(--mono)">${i+1} / ${MOCK.length}</span><button class="btn" data-act="slide-next" ${i>=MOCK.length-1?"disabled":""}>ถัดไป →</button><span class="spacer"></span><button class="btn primary" data-act="slide-fs">เต็มจอ</button></div>
+     <div class="row"><button class="btn" data-act="slide-prev" ${i<=0?"disabled":""}>← ก่อนหน้า</button><span class="muted" style="font-family:var(--mono)">${i+1} / ${MOCK.length}</span><button class="btn" data-act="slide-next" ${i>=MOCK.length-1?"disabled":""}>ถัดไป →</button><span class="spacer"></span><button class="btn primary" data-act="slide-fs">${fsLabel()}</button></div>
      <div class="thumbs">${MOCK.map((m,k)=>`<button data-slide="${k}" aria-current="${k===i}"><b>${k+1}</b> ${h(m[1])}</button>`).join("")}</div>`}
   </div>`;
 }
@@ -511,7 +525,7 @@ function vPresent(v){
   const g=S.sel.present,st=S.st||{},p=st.present?.[g]||{},w=W(g),ag=askerOf(g),pat=patternOf(ag);const f=w.slide?.fileId||w.photo?.fileId;const T=S.teacher;
   v.innerHTML=stageHead("present","นำเสนอและซักถามสด",T?`<label class="f" style="flex-direction:row;align-items:center;gap:6px">นำเสนอ<input type="number" id="durp" min="30" step="30" value="${S.dur.p}" style="width:84px">วิ</label><label class="f" style="flex-direction:row;align-items:center;gap:6px">ซักถาม<input type="number" id="durq" min="30" step="30" value="${S.dur.q}" style="width:84px">วิ</label>`:"")+
   `<div class="present"><div class="glist">${SCEN.map((_,i)=>`<button data-pg="${i+1}" aria-current="${g===i+1}"><span>กลุ่ม ${i+1}</span>${st.present?.[i+1]?.done?`<span class="chip ok">✓</span>`:""}</button>`).join("")}</div>
-   <div class="stack fsable" id="pstage">
+   <div class="stack" id="pstage">
      <div class="grid2" style="align-items:start">
        <div class="stack"><span class="eyebrow">กลุ่ม ${g} · ${h(SCEN[g-1].t)}</span>
          ${T?`<div class="phase" id="phase"></div><div class="clock" id="clock">0:00</div><div class="bar" id="bar"><i style="width:0%"></i></div><div class="row" id="tbtns"></div>`:`<p class="muted">อาจารย์ควบคุมเวลาจากหน้าจอหลัก</p>`}</div>
@@ -521,7 +535,7 @@ function vPresent(v){
        </div></div>
      <div class="qtpl"><b>ส่วนที่ 1 (ทุกกลุ่ม):</b> “มาตรการ <span class="blank"></span> ของกลุ่ม ${g} เป็น [Mitigation / Adaptation] เพราะ <span class="blank"></span>”<br><b>ส่วนที่ 2 · แบบ ${pat} ${PATTERN[pat].name}:</b> “${h(PATTERN[pat].tpl).replace(/____/g,'<span class="blank"></span>')}”</div>
      <div class="slidebox">${f?`<img src="${img(f,1920)}" alt="ภาพนำเสนอกลุ่ม ${g}">`:`<span class="muted">กลุ่ม ${g} ยังไม่ได้ส่งภาพนำเสนอ</span>`}</div>
-     ${T?`<div class="row"><button class="btn" data-act="present-fs">เต็มจอ</button><span class="spacer"></span>${p.done?`<span class="chip ok">นำเสนอแล้ว</span><button class="btn ghost" data-act="present-undone">ยกเลิกเครื่องหมาย</button>`:`<button class="btn primary" data-act="present-done">จบกลุ่มนี้</button>`}${g<9?`<button class="btn" data-act="present-next">กลุ่มถัดไป →</button>`:""}</div>`:""}
+     ${T?`<div class="row"><button class="btn" data-act="present-fs">${fsLabel()}</button><span class="spacer"></span>${p.done?`<span class="chip ok">นำเสนอแล้ว</span><button class="btn ghost" data-act="present-undone">ยกเลิกเครื่องหมาย</button>`:`<button class="btn primary" data-act="present-done">จบกลุ่มนี้</button>`}${g<9?`<button class="btn" data-act="present-next">กลุ่มถัดไป →</button>`:""}</div>`:""}
    </div></div>`;
   paintTimer();
 }
@@ -638,7 +652,7 @@ document.addEventListener("click",async ev=>{
     case "groups-unlock-yes":S.confirmUnlock=false;S.draft=S.st?.groupIds||null;try{await call("unlockGroups")}catch(e){toast(e.message,6000)}return load();
     case "slide-prev":S.sel.slide=Math.max(0,S.sel.slide-1);return render();
     case "slide-next":S.sel.slide=Math.min(MOCK.length-1,S.sel.slide+1);return render();
-    case "slide-fs":return fs($("#slidestage"));
+    case "slide-fs":return fs("slides");
     case "slides-mock":try{await call("clearSlides")}catch(e){toast(e.message,6000)}return load();
     case "work-edit":S.edit=S.edit?null:structuredClone(W(S.sel.work).ex||blankEx());while(S.edit&&S.edit.chain.length<5) S.edit.chain.push("");return render();
     case "ch-add":readEditor();S.edit.chain.push("");return renderEditor();
@@ -649,7 +663,7 @@ document.addEventListener("click",async ev=>{
     case "present-done":return savePresent({done:true});
     case "present-undone":return savePresent({done:false});
     case "present-next":S.sel.present=Math.min(9,g+1);S.timer={phase:"idle",total:0,left:0,endAt:0,running:false};return render();
-    case "present-fs":return fs($("#pstage"));
+    case "present-fs":return fs("present");
     case "t-present":return tStart("present");
     case "t-qa":return tStart("qa");
     case "t-pause":{const T=S.timer;if(T.running){T.left=Math.max(0,(T.endAt-Date.now())/1000);T.running=false}else{T.endAt=Date.now()+T.left*1000;T.running=T.left>0}return paintTimer()}

@@ -70,6 +70,7 @@ function handle_(p) {
       case 'submitHomework': return out_(submitHomework_(p));
       case 'checkHomework':  return out_(checkHomework_(p));
       case 'homeworkList':   need_(teacher); return out_({ ok: true, list: homeworkList_() });
+      case 'resetAll':       need_(teacher); return out_(resetAll_(p.parts || []));
       default:               return out_({ ok: false, error: 'ไม่รู้จักคำสั่ง' });
     }
   } catch (err) {
@@ -275,6 +276,29 @@ function homeworkSummary_(kv) {
   const out = {};
   Object.keys(kv).forEach(k => { if (k.indexOf('hw/') === 0) out[k.slice(3)] = kv[k]; });
   return out;
+}
+/* ---------- reset (backup first; Drive files are kept) ---------- */
+const RESET_KEYS = { groups: ['groups'], work: ['work/'], present: ['present/'], exit: ['exit/'], homework: ['hw/'], slides: ['slides'], settings: ['settings'] };
+function resetAll_(parts) {
+  const want = [];
+  parts.forEach(k => (RESET_KEYS[k] || []).forEach(x => want.push(x)));
+  if (!want.length) throw new Error('ยังไม่ได้เลือกสิ่งที่จะรีเซ็ต');
+  return withLock_(() => {
+    const ss = ss_(); const sh = kvSheet_();
+    const bk = sh.copyTo(ss); bk.setName('_backup_' + stamp_() + '_' + Utilities.getUuid().slice(0, 4)); bk.hideSheet();
+    const v = sh.getDataRange().getValues();
+    const keep = [v[0]]; let removed = 0;
+    for (let i = 1; i < v.length; i++) {
+      const k = String(v[i][0] || '');
+      if (!k) continue;
+      const hit = want.some(x => x.slice(-1) === '/' ? k.indexOf(x) === 0 : k === x);
+      if (hit) removed++; else keep.push(v[i]);
+    }
+    sh.clearContents();
+    sh.getRange(1, 1, keep.length, 3).setValues(keep);
+    writeReports_();
+    return { ok: true, removed: removed, backup: bk.getName() };
+  });
 }
 function homeworkList_() {
   const kv = kvAll_(); const hw = homeworkSummary_(kv);

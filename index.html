@@ -220,7 +220,7 @@ const STEPS=[
  {r:"groups",n:"01",t:"สุ่มจัดกลุ่ม",d:"สุ่มนิสิต 53 คนเป็น 9 กลุ่ม คละหลักสูตรและเพศ พร้อมสถานการณ์ประจำกลุ่ม"},
  {r:"slides",n:"02",t:"สไลด์บรรยาย",d:"สไลด์ตัวอย่าง 22 หน้า อาจารย์อัปโหลดไฟล์จริงทับได้ทุกเมื่อ"},
  {r:"work",n:"03",t:"อภิปรายกลุ่ม",d:"ถ่ายรูปแผ่นงาน A4 แล้วส่งภาพนำเสนอ ทำจาก AI ของกลุ่มหรือพิมพ์ให้ระบบสร้าง"},
- {r:"present",n:"04",t:"นำเสนอและซักถามสด",d:"สุ่มผู้นำเสนอและผู้ถาม นาฬิกาจับเวลา แบบคำถาม A B C"},
+ {r:"present",n:"04",t:"นำเสนอและซักถามสด",d:"สุ่มผู้นำเสนอและผู้ถาม พร้อมนาฬิกาจับเวลา"},
  {r:"exit",n:"05",t:"บัตรออกรายกลุ่ม",d:"สุ่มผู้ตอบ 3 คำถาม ตอบครบแล้วกลุ่มออกจากห้องได้"},
  {r:"homework",n:"06",t:"ส่งการบ้าน",d:"ทำในกระดาษ A4 ถ่ายรูปแล้วอัปโหลดด้วยรหัสนิสิต"}
 ];
@@ -334,7 +334,19 @@ function statusOf(r){
 }
 function vHome(v){
   v.innerHTML=`${S.err?`<div class="notice bad" style="margin-top:16px">${h(S.err)} <button class="btn" data-act="reload">ลองใหม่</button></div>`:""}
-  <div class="steps">${STEPS.map(s=>{const [k,t]=statusOf(s.r);return `<button class="step" data-go="${s.r}"><span class="num">ขั้นที่ ${s.n}</span><h3>${h(s.t)}</h3><p>${h(s.d)}</p><span class="chip ${k}">${h(t)}</span></button>`}).join("")}</div>`;
+  <div class="steps">${STEPS.map(s=>{const [k,t]=statusOf(s.r);return `<button class="step" data-go="${s.r}"><span class="num">ขั้นที่ ${s.n}</span><h3>${h(s.t)}</h3><p>${h(s.d)}</p><span class="chip ${k}">${h(t)}</span></button>`}).join("")}</div>
+  ${S.teacher?resetPanel():""}`;
+}
+const RESET_PARTS=[["groups","การจัดกลุ่ม",true],["work","งานกลุ่ม",true],["present","ผลการนำเสนอ",true],["exit","บัตรออก",true],["homework","รายการส่งการบ้าน",true],["settings","กำหนดส่งการบ้าน",true],["slides","สไลด์บรรยาย",false]];
+function resetPanel(){
+  if(!S.resetOpen) return `<div class="row" style="margin-top:28px"><span class="spacer"></span><button class="btn ghost" data-act="reset-open">รีเซ็ตค่าทั้งหมดเพื่อเริ่มใหม่</button></div>`;
+  return `<form class="panel stack" id="resetform" style="margin-top:28px;border-color:var(--bad)">
+    <h3>รีเซ็ตค่าเพื่อเริ่มใหม่</h3>
+    <p class="small muted">ระบบจะสำรองข้อมูลปัจจุบันไว้ในแท็บที่ซ่อนอยู่ของ Google Sheet ก่อนล้าง ไฟล์รูปและสไลด์ใน Google Drive จะไม่ถูกลบ</p>
+    <div class="row">${RESET_PARTS.map(([k,t,on])=>`<label class="chip" style="cursor:pointer;padding:6px 12px"><input type="checkbox" name="part" value="${k}" ${on?"checked":""}> ${h(t)}</label>`).join("")}</div>
+    <label class="f">พิมพ์คำว่า RESET เพื่อยืนยัน<input type="text" id="resetword" autocomplete="off" style="max-width:220px"></label>
+    <div class="row"><button type="button" class="btn ghost" data-act="reset-cancel">ยกเลิก</button><button type="submit" class="btn" style="background:var(--bad);border-color:var(--bad);color:#fff">รีเซ็ต</button></div>
+  </form>`;
 }
 
 /* ---------------- 1 groups ---------------- */
@@ -645,6 +657,8 @@ document.addEventListener("click",async ev=>{
     case "login":$("#login").hidden=false;$("#tkey").focus();return;
     case "logout":S.key="";S.teacher=false;try{localStorage.removeItem("cc-tk")}catch(e){}return load();
     case "reload":S.loading=true;render();return load();
+    case "reset-open":S.resetOpen=true;return render();
+    case "reset-cancel":S.resetOpen=false;return render();
     case "groups-shuffle":return doShuffle();
     case "groups-lock":return lockGroups();
     case "groups-unlock":S.confirmUnlock=true;return render();
@@ -682,6 +696,17 @@ document.addEventListener("submit",async ev=>{
   if(f.id==="linkform"){const l=$("#slidelink").value.trim();if(!l) return;try{toast("กำลังตั้งค่าไฟล์สไลด์…",8000);await call("setSlidesLink",{link:l});toast("ใช้ไฟล์สไลด์นี้แล้ว")}catch(e){toast(e.message,6000)}return load()}
   if(f.id==="hwform") return hwSubmit($("#hwfile").files,$("#sid").value,false);
   if(f.id==="hwforform") return hwSubmit($("#hwfilefor").files,$("#hwfor").value,true);
+  if(f.id==="resetform"){
+    if($("#resetword").value.trim().toUpperCase()!=="RESET") return toast("พิมพ์คำว่า RESET เพื่อยืนยัน",4000);
+    const parts=[...f.querySelectorAll('input[name="part"]:checked')].map(x=>x.value);
+    if(!parts.length) return toast("เลือกอย่างน้อย 1 รายการ",4000);
+    try{S.busy=true;toast("กำลังรีเซ็ต…",20000);const j=await call("resetAll",{parts});
+      S.resetOpen=false;S.draft=null;S.edit=null;S.hwCheck=null;S.confirmUnlock=false;S.sel={work:1,present:1,exit:1,slide:0};
+      S.timer={phase:"idle",total:0,left:0,endAt:0,running:false};
+      toast(`รีเซ็ตแล้ว ล้างข้อมูล ${j.removed} รายการ สำรองไว้ในแท็บ ${j.backup}`,7000)}
+    catch(e){toast(e.message,7000)}finally{S.busy=false}
+    return load();
+  }
   if(f.id==="dueform"){try{await call("setSettings",{data:{hwDue:$("#hwdue").value}});toast("บันทึกกำหนดส่งแล้ว")}catch(e){toast(e.message,6000)}return load()}
 });
 $("#logincancel").addEventListener("click",()=>{$("#login").hidden=true});
